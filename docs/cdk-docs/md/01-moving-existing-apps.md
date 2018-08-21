@@ -419,9 +419,9 @@ Run or click on this command to remove them:
 
 **3. Fix the code**
 
-Open `src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java`. 
+Open `src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java` using the following command.
 ````
-src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
+vi src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 ````
 Open the file to fix the code:
 
@@ -503,7 +503,7 @@ In this step we will re-run the RHAMT report to verify our migration was success
 
 **1. Run the RHAMT CLI against the project**
 
-Click on the below command to clean the old build artifacts and re-execute the RHAMT CLI and analyze the new project:
+Run the below command to clean the old build artifacts and re-execute the RHAMT CLI and analyze the new project:
 
 ```
 mvn clean && \
@@ -521,7 +521,7 @@ mvn clean && \
 
 **2. View the results**
 
-Navigate back to the RDP session and reload the report web page index.html 
+Navigate back to the RDP session and reload the report web page, index.html.
 
 > CDK USERS: If you running this outside the Katacoda environment, you can browse directly by opening `file:///${HOME}/rhamt-reports/monolith` in your browser
 
@@ -536,8 +536,6 @@ this app to JBoss EAP, congratulations!
 
 Now that we've migrated the app, let's deploy it and test it out and start to explore some of the features that JBoss EAP
 plus Red Hat OpenShift bring to the table.
-
-
 
 ## Migrate and run the project
 Navigate vack to the SSH session.
