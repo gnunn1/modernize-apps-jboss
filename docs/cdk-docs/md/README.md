@@ -46,9 +46,25 @@ cases for reactive microservices.
 
 # Accessing the lab and verifying pre-requisites
 
-You can register for the lab by using the url provided by the instructor.
-Once you have registered for the lab you will get the lab environment details. Using the given credentials, login to **Azure** and ensure that you can access the resource groups created. Then open the resource group and **SSH** into the **LABVM (jump-VM)**, give **root permissions to the user** and continue with the lab. 
-* Verify the pre-requisites by running the following commands
+1. You can register for the lab by using the URL provided by the instructor. Open a browse navigate to the given URL. Once you get in to the registration page, provide your details and click on **Submit**. Then in the next page that appear, click on **Launch lab** to start the deployment. 
+<kbd>![](Images/register.jpg)</kbd>
+2. Once the deployment is completed, you will recieve the lab environment details via Email. Ensure that the lab environment details consist of two sections, **Azure Credentials** and **Environment Details**
+<kbd>![](Images/lab-details.jpg)</kbd>
+3. Navigate to https://portal.azure.com and login to **Azure** using the credentials given in the lab Environment details page.
+4. Once you logged in to Azure, Click on **Resource Groups** from the Menu bar. </br>
+<kbd>![](Images/rg.jpg)</kbd>
+5. Ensure that you can access the **Resource group** and **Resources**. Select virtual machine named **labvm** from the list of resources in the Resource group.</br>
+<kbd>![](Images/labvm.jpg)</kbd>
+6. Copy the **Public IP Address** from the **Virtual Machine** page</br>
+<kbd>![](Images/copyip.jpg)</kbd>
+7. Open **Putty**, **paste** the copied IP Address and click on **Open**. Then login with the **JumpVM Username** and **JumpVM Password** provided in the lab environment details page.</br>
+<kbd>![](Images/putty.jpg)</kbd>
+
+8. Once you logged in to **labvm** give **root permissions** to the user by running the following command. Provide the JumpVM Password if prompted.
+````
+sudo su -
+````
+9. Then Verify the pre-requisites by running the following commands
   *	**git --version** (it should be 2.7.2 or later)
   *	**java -version** (it should be 1.8.x or later)
   *	**oc** (ensure that this command is working, if not it will show Command not found.)
@@ -56,7 +72,18 @@ Once you have registered for the lab you will get the lab environment details. U
   * navigate to **/root** and ensure that **Projects, rhamt-cli-4.0.0.Beta4 and jboss-eap-7.1.0.zip** folders are already present.
 
 
-
-
+## Checking RDP connection to the LAB VM
+1. Navigate to https://portal.azure.com and login to **Azure** using the credentials given in the lab Environment details page. Click on the virtual machine, **labvm**.</br>
+<kbd>![](Images/labvm.jpg)</kbd>
+2. In the virtual machine page click on **Connect**. In the new blade that appear, click on **RDP** and select **Download RDP file**.</br>
+<kbd>![](Images/rdp.jpg)</kbd>
+3. Open the downloaded file and click on **Connect**.</br>
+<kbd>![](Images/rdp1.jpg)</kbd>
+4. In the new blade that appear, click on **Yes**.</br>
+<kbd>![](Images/rdp2.jpg)</kbd>
+5. Now in the Login page, provide the credentials as follows and click on **OK**
+* Username : **root**
+* Password : **demoPassword1!**</br>
+<kbd>![](Images/rdp3.jpg)</kbd>
 
 
