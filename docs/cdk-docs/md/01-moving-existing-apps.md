@@ -54,7 +54,6 @@ the [RHAMT documentation](https://access.redhat.com/documentation/en/red-hat-app
 Run the following commands to set up your environment for this scenario and start in the right directory:
 
 ```sh
-export JAVA_HOME=$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')
 cd ${HOME}/projects/monolith
 git pull --quiet
 
@@ -104,7 +103,6 @@ You should see:
 
 ```
 .
-+-- hello.txt
 +-- pom.xml
 +-- README.md
 \-- src
@@ -148,11 +146,11 @@ migration paths include **IBM® WebSphere® Application Server** and **JBoss EAP
 
 **3. View the results**
 
-Next, click to view the report at 
+Go to Azure portal and RDP to the LABVM using the following credentials
+* Username : root
+* Password : demoPassword1! </br>
 
-`http://localhost:9000`
-
-> CDK USERS: If you running this outside the Katacoda environment, you must browse directly by opening `file:///${HOME}/rhamt-reports/monolith` in your browser
+Once you are logged in to the VM, Navigate to Home > rhamt-reports > monolith and in that open index.html where you can see the result.
 
 You should see the landing page for the report:
 
@@ -202,11 +200,7 @@ In this step we will migrate some Weblogic-specific code in the app to use stand
 
 **1. Review the issue related to `ApplicationLifecycleListener`**
 
-Open the Issues report at 
-
-`http://localhost:9000`:
-
-> CDK USERS: If you running this outside the Katacoda environment, you must browse directly by opening `file:///${HOME}/rhamt-reports/monolith/reports/migration_issues.html` in your browser
+Click on the **Issues** tab in the browser.
 
 ![Issues](../../../assets/moving-existing-apps/project-issues.png)
 
@@ -226,13 +220,14 @@ using proprietary interfaces.
 While the code in our startup and shutdown is very simple, in the real world this code may require additional thought as part of the migration. However,
 using this method makes the code much more portable.
 
-**2. Open the file**
-
-Open the file `src/main/java/com/redhat/coolstore/utils/StartupListener.java` using this link.
+**2. Open the file** </br>
+Now navigate back to the SSH session and open the file `src/main/java/com/redhat/coolstore/utils/StartupListener.java` using the following command.
+````
+vi src/main/java/com/redhat/coolstore/utils/StartupListener.java
+````
 The first issue we will tackle is the one reporting the use of _Weblogic ApplicationLifecyleEvent_ and
 _Weblogic LifecycleListener_ in this file. Open the file to make these changes in the file.
 
-> CDK USERS: If you running this outside the Katacoda environment you won't have a **Copy to Editor** button. Instead you must make these code changes yourself, manually.
 
 ```java
 package com.redhat.coolstore.utils;
@@ -264,7 +259,7 @@ public class StartupListener {
 }
 ```
 
-**3. Test the build**
+**3. Test the build** </br>
 
 Build and package the app using Maven to make sure the changed code still compiles:
 
@@ -289,11 +284,14 @@ The WebLogic `NonCatalogLogger` is not supported on JBoss EAP (or any other Java
 We will use the standard Java Logging framework, a much more portable framework. The framework also
 [supports internationalization](https://docs.oracle.com/javase/8/docs/technotes/guides/logging/overview.html#a1.17) if needed.
 
-**1. Open the file**
+**1. Open the file** </br>
 
-Open the offending file `src/main/java/com/redhat/coolstore/service/OrderServiceMDB.java`
-
-**2. Make the changes** Open the file to make these changes:
+Open the offending file `src/main/java/com/redhat/coolstore/service/OrderServiceMDB.java` using the following command.
+````
+vi src/main/java/com/redhat/coolstore/service/OrderServiceMDB.java
+````
+**2. Make the changes**
+</br>Open the file to make these changes:
 
 ```java
 package com.redhat.coolstore.service;
@@ -397,10 +395,7 @@ on your migration path.
 
 **1. Review the issues**
 
-From the RHAMT Issues report at 
-
-`http://localhost:9000`
-we will fix the remaining issues:
+From the RHAMT Issues report, we will fix the remaining issues:
 
 * **Call of JNDI lookup** - Our apps use a weblogic-specific [JNDI](https://en.wikipedia.org/wiki/Java_Naming_and_Directory_Interface) lookup scheme.
 * **Proprietary InitialContext initialization** - Weblogic has a very different lookup mechanism for InitialContext objects
@@ -424,7 +419,11 @@ Run or click on this command to remove them:
 
 **3. Fix the code**
 
-Open `src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java`. Open the file to fix the code:
+Open `src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java`. 
+````
+src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
+````
+Open the file to fix the code:
 
 ```java
 package com.redhat.coolstore.service;
@@ -522,9 +521,7 @@ mvn clean && \
 
 **2. View the results**
 
-Reload the report web page at 
-
-`http://localhost:9000`
+Navigate back to the RDP session and reload the report web page index.html 
 
 > CDK USERS: If you running this outside the Katacoda environment, you can browse directly by opening `file:///${HOME}/rhamt-reports/monolith` in your browser
 
@@ -543,7 +540,7 @@ plus Red Hat OpenShift bring to the table.
 
 
 ## Migrate and run the project
-
+Navigate vack to the SSH session.
 Now that we migrated the application you are probably eager to test it. To test it we locally we first need to install JBoss EAP.
 
 Run the following command in the terminal window.
@@ -644,8 +641,8 @@ We are now ready to deploy the application
 
 Wait for the server to startup. You should see `Deployed "ROOT.war" (runtime-name: "ROOT.war")`
 ## Test the application
-
-Access the application by clicking here at 
+Navigate back to the RDP session.
+Open the browser, Access the application by navigating to 
 
 `http://localhost:8080` and shop around for some cool stuff.
 
@@ -710,8 +707,8 @@ This will open a new browser with the openshift console.
 
 Login using:
 
-* Username: `developer`
-* Password: `developer`
+* Username: provide the openshift cluster username from the lab details page.
+* Password: provide the openshift cluster password from the lab details page.
 
 > If you running this outside the Katacoda environment, you will need to login with proper credentials supplied to you ahead of time
 
