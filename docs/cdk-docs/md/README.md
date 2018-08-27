@@ -60,16 +60,12 @@ cases for reactive microservices.
 7. Open **Putty**, **paste** the copied IP Address and click on **Open**. Then login with the **JumpVM Username** and **JumpVM Password** provided in the lab environment details page.</br>
 <kbd>![](Images/putty.jpg)</kbd>
 
-8. Once you logged in to **labvm** give **root permissions** to the user by running the following command. Provide the JumpVM Password if prompted.
-````
-sudo su -
-````
-9. Then Verify the pre-requisites by running the following commands
+8. Once you logged in to **labvm**, verify the pre-requisites by running the following commands
   *	**git --version** (it should be 2.7.2 or later)
   *	**java -version** (it should be 1.8.x or later)
   *	**oc** (ensure that this command is working, if not it will show Command not found.)
   *	**mvn --version** (it should be 3.3.9 or later)
-  * navigate to **/root** and ensure that **Projects, rhamt-cli-4.0.0.Beta4 and jboss-eap-7.1.0.zip** folders are already present.
+  * Ensure that **Projects, rhamt-cli-4.0.0.Beta4 and jboss-eap-7.1.0.zip** folders are already present.
 
 
 ## Checking RDP connection to the LAB VM
