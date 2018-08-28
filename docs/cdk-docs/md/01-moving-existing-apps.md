@@ -95,7 +95,7 @@ an online shopping store called _Coolstore_ containing retail items that you can
 cart and purchase. The source code is laid out in different
 subdirectories according to Maven best practices.
 
-> Click on the `tree` command below to automatically copy it into the terminal and execute it
+> Run the `tree` command below.
 
 ``tree -L 3``
 
@@ -123,7 +123,7 @@ When you later deploy the application, it will look like:
 
 **3. Run the RHAMT CLI against the project**
 
-The RHAMT CLI has a number of options to control how it runs. Click on the below command
+The RHAMT CLI has a number of options to control how it runs. Run the below command
 to execute the RHAMT CLI and analyze the existing project:
 
 ```
@@ -147,10 +147,10 @@ migration paths include **IBM® WebSphere® Application Server** and **JBoss EAP
 **3. View the results**
 
 Go to Azure portal and RDP to the LABVM using the following credentials
-* Username : root
+* Username : demouser
 * Password : demoPassword1! </br>
 
-Once you are logged in to the VM, Navigate to Home > rhamt-reports > monolith and in that open index.html where you can see the result.
+Once you are logged in to the VM, navigate to **Home > rhamt-reports > monolith** and open **index.html** where you can see the results.
 
 You should see the landing page for the report:
 
@@ -217,8 +217,7 @@ bean at application start. We will similarly use the `@PostConstruct` and `@PreD
 methods to invoke at the start and end of the application lifecyle achieving the same result but without
 using proprietary interfaces.
 
-While the code in our startup and shutdown is very simple, in the real world this code may require additional thought as part of the migration. However,
-using this method makes the code much more portable.
+While the code in our startup and shutdown is very simple, in the real world this code may require additional thought as part of the migration. However, using this method makes the code much more portable.
 
 **2. Open the file** </br>
 Now navigate back to the SSH session and open the file `src/main/java/com/redhat/coolstore/utils/StartupListener.java` using the following command.
@@ -408,12 +407,12 @@ JBoss EAP's internal message queue implementation provided by [Apache ActiveMQ A
 **2. Remove the weblogic EJB Descriptors**
 
 The first step is to remove the unneeded `weblogic-ejb-jar.xml` file. This file is proprietary to Weblogic and not recognized or processed by JBoss
-EAP. Type or click the following command to remove it:
+EAP. Run the following command to remove it:
 
 `rm -f src/main/webapp/WEB-INF/weblogic-ejb-jar.xml`
 
 While we're at it, let's remove the stub weblogic implementation classes added as part of the scenario.
-Run or click on this command to remove them:
+Run this command to remove them:
 
 `rm -rf src/main/java/weblogic`
 
@@ -499,7 +498,7 @@ verify you made all the changes correctly and try the build again.
 
 ## Re-Run the RHAMT report
 
-In this step we will re-run the RHAMT report to verify our migration was successfu.
+In this step we will re-run the RHAMT report to verify our migration was successful.
 
 **1. Run the RHAMT CLI against the project**
 
@@ -538,8 +537,7 @@ Now that we've migrated the app, let's deploy it and test it out and start to ex
 plus Red Hat OpenShift bring to the table.
 
 ## Migrate and run the project
-Navigate vack to the SSH session.
-Now that we migrated the application you are probably eager to test it. To test it we locally we first need to install JBoss EAP.
+Navigate back to the SSH session. Now that we migrated the application you are probably eager to test it. To test it locally, we first need to install JBoss EAP.</br>
 
 Run the following command in the terminal window.
 
@@ -551,10 +549,13 @@ We should also set the `JBOSS_HOME` environment variable like this:
 
 Done! That is how easy it is to install JBoss EAP. 
 
-Open the `pom.xml` file.
+Open the `pom.xml` file by running the following command.
+````
+vi pom.xml
+````
 
 ## The maven-wildfly-plugin
-JBoss EAP comes with a nice maven-plugin tool that can stop, start, deploy, and configure JBoss EAP directly from Apache Maven. Let's add that the pom.xml file.
+JBoss EAP comes with a nice maven-plugin tool that can stop, start, deploy, and configure JBoss EAP directly from Apache Maven. Let's add that in the pom.xml file.
 
 At the `TODO: Add wildfly plugin here` we are going to add a the following configuration
 
@@ -624,7 +625,7 @@ We are now ready to build and test the project
 
 Our application is at this stage pretty standards based, but it needs two things. One is the  we need to add the JMS Topic since our application depends on it. 
 
-`export JBOSS_HOME=$HOME/jboss-eap-7.1 ; \
+`export JBOSS_HOME=$HOME/jboss-eap-7.1 ; 
 mvn wildfly:start wildfly:add-resource wildfly:shutdown`
 
 Wait for a `BUILD SUCCESS` message. If it fails, check that you made all the correct changes and try again!
@@ -650,7 +651,7 @@ You may see WARNINGs in the console output. We will fix these soon!
 
 ## Shutdown the application
 
-Before moving on, click here to stop the process: `clear` (or click in the **Terminal** window and type CTRL-C).
+Before moving on, in the **Terminal** window, type CTRL-C.
 
 
 
