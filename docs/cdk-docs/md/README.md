@@ -57,8 +57,11 @@ cases for reactive microservices.
 <kbd>![](Images/labvm.jpg)</kbd>
 6. Copy the **Public IP Address** from the **Virtual Machine** page.</br>
 <kbd>![](Images/copyip.jpg)</kbd>
-7. Open **Putty**, **paste** the copied IP Address and click on **Open**. Then login with the **JumpVM Username** and **JumpVM Password** provided in the lab environment details page.</br>
+7. **For windows Users :** Open **Putty**, **paste** the copied IP Address and click on **Open**. Then login with the **JumpVM Username** and **JumpVM Password** provided in the lab environment details page.</br>
 <kbd>![](Images/putty.jpg)</kbd>
+8. **For Mac Users :** Select "**Connect**" from the virtual machine page, then select "**SSH**" tab, then click on the "**click-to-Copy**" icon at the end of the line, and finally paste the SSH string to an Xterm on Mac OS.
+<kbd>![](Images/macssh.jpg)</kbd>
+
 
 8. Once you logged in to **labvm**, verify the pre-requisites by running the following commands.
   *	**git --version** (it should be 2.7.2 or later)
@@ -69,6 +72,7 @@ cases for reactive microservices.
 
 
 ## Checking RDP connection to the LAB VM
+### For Windows users
 1. Navigate to https://portal.azure.com and login to **Azure** using the credentials given in the lab Environment details page. Click on the virtual machine, **labvm**.</br>
 <kbd>![](Images/labvm.jpg)</kbd>
 2. In the virtual machine page click on **Connect**. In the new blade that appear, click on **RDP** and select **Download RDP file**.</br>
@@ -78,8 +82,21 @@ cases for reactive microservices.
 4. In the new blade that appear, click on **Yes**.</br>
 <kbd>![](Images/rdp2.jpg)</kbd>
 5. Now in the Login page, provide the credentials as follows and click on **OK**.
-* Username : **root**
+* Username : **demouser**
 * Password : **demoPassword1!**</br>
-<kbd>![](Images/rdp3.jpg)</kbd>
+<kbd>![](Images/xvnc.jpg)</kbd>
 
+### For Mac users 
+1. Before beginning, you will need to install the Microsoft Remote Desktop Application from Apple’s App Store:  https://itunes.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12
+2. open the application and Click on the '**+**' symbol to add a new connection.
+3. In the new window that appears, provide the following details and save the connection.
+  * PC Name : <Provide the **Public IP Address** of the **labvm**>
+  * Connection Name : <provide any connection name> 
+4. Save the connection and close the dilog box.
+5. Double click the newly created connection. If the "**verify certificate**" dialog appears, click on continue.
+6. Then the following dialog will appear and ask you to authenticate.  Use your Jump VM Username and Jump VM Password to do this.</br>
+* Username : **demouser**
+* Password : **demoPassword1!**</br>
+ <kbd>![](Images/xvnc.jpg)</kbd>
+ 
 
