@@ -225,7 +225,8 @@ Now navigate back to the SSH session and open the file `src/main/java/com/redhat
 vi src/main/java/com/redhat/coolstore/utils/StartupListener.java
 ````
 The first issue we will tackle is the one reporting the use of _Weblogic ApplicationLifecyleEvent_ and
-_Weblogic LifecycleListener_ in this file. Open the file to make these changes in the file.
+_Weblogic LifecycleListener_ in this file. </br>
+Replace the code in the file with the following code:
 
 
 ```java
@@ -290,7 +291,7 @@ Open the offending file `src/main/java/com/redhat/coolstore/service/OrderService
 vi src/main/java/com/redhat/coolstore/service/OrderServiceMDB.java
 ````
 **2. Make the changes**
-</br>Open the file to make these changes:
+</br>Replace the code in the file with the following code:
 
 ```java
 package com.redhat.coolstore.service;
@@ -422,7 +423,7 @@ Open `src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java` 
 ````
 vi src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 ````
-Open the file to fix the code:
+Replace the code in the file with the following code:
 
 ```java
 package com.redhat.coolstore.service;
@@ -694,11 +695,9 @@ At the `<!-- TODO: Add OpenShift profile here -->` we are going to add a the fol
 
 **2. Create the OpenShift project**
 
-First, click on the **OpenShift Console** tab next to the Terminal tab:
+First, open a browser and navigate to the OpenShift console URL provided in the lab details page.
 
-![OpenShift Console](../../../assets/moving-existing-apps/openshift-console-tab.png)
-
-This will open a new browser with the openshift console.
+This will open the openshift console.
 
 > If you running this outside the Katacoda environment, you will need to browse to your $OPENSHIFT_MASTER manually.
 
@@ -736,7 +735,7 @@ This will take you to the project overview. There's nothing there yet, but that'
 
 We'll use the CLI to deploy the components for our monolith. For that, go to OpenShift Web Console. On the top right corner of the OpenShift Web Console, click on the down arrow next to the username "ocpadmin" and click on "**Copy Login Command**". This will put the "oc login" command in your clipboard.</br>
 <kbd>![](Images/ocplogin.jpg)</kbd>
-Paste the content of your clipboard in your terminal window and press return. This will connect your terminal session to the OpenShift cluster.</br>
+Paste the content of your clipboard in your terminal window and press Enter. This will connect your terminal session to the OpenShift cluster.</br>
 To deploy the monolith template using the CLI, execute the following commands:
 
 Switch to the developer project you created earlier:
