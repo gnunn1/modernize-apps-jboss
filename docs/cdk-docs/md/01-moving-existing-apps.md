@@ -734,7 +734,10 @@ This will take you to the project overview. There's nothing there yet, but that'
 
 **3. Deploy the monolith**
 
-We'll use the CLI to deploy the components for our monolith. To deploy the monolith template using the CLI, execute the following commands:
+We'll use the CLI to deploy the components for our monolith. For that, go to OpenShift Web Console. On the top right corner of the OpenShift Web Console, click on the down arrow next to the username "ocpadmin" and click on "**Copy Login Command**". This will put the "oc login" command in your clipboard.</br>
+<kbd>![](Images/ocplogin.jpg)</kbd>
+Paste the content of your clipboard in your terminal window and press return. This will connect your terminal session to the OpenShift cluster.</br>
+To deploy the monolith template using the CLI, execute the following commands:
 
 Switch to the developer project you created earlier:
 
