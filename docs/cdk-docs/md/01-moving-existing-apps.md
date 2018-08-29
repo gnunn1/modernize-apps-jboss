@@ -163,6 +163,7 @@ yum install nginx
 systemctl start nginx
 systemctl enable nginx
 cp -R /home/demouser/rhamt-reports /usr/share/nginx/html
+systemctl restart nginx
 
 Then open a browser and navigate to http://<labvm IP Address>/rhamt-reports/monolith/index.html
 ````
