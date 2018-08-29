@@ -153,6 +153,19 @@ Go to Azure portal and RDP to the LABVM using the following credentials
 Once you are logged in to the VM, navigate to **Home > rhamt-reports > monolith** and open **index.html** where you can see the results.
 
 You should see the landing page for the report:
+````
+For publicly accessing the landing page please run the commands one by one.
+
+sudo su -          (provide the same password of demouser if prompted)
+
+yum install epel-release
+yum install nginx
+systemctl start nginx
+systemctl enable nginx
+cp -R /home/demouser/rhamt-reports /usr/share/nginx/html
+
+Then open a browser and navigate to http://<labvm IP Address>/rhamt-reports/monolith/index.html
+````
 
 ![Landing Page](../../../assets/moving-existing-apps/landingpage.png)
 
@@ -645,6 +658,10 @@ Navigate back to the RDP session.
 Open the browser, Access the application by navigating to 
 
 `http://localhost:8080` and shop around for some cool stuff.
+
+````
+For publicly accessing the application, open a browser and navigate to http://<labvm IP Address>:8080
+````
 
 ![CoolStore Monolith](../../../assets/moving-existing-apps/coolstore-web.png)
 
