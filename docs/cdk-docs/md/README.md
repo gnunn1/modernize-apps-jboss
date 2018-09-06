@@ -90,7 +90,7 @@ cases for reactive microservices.
 1. Before beginning, you will need to install the Microsoft Remote Desktop Application from Apple’s App Store:  https://itunes.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12
 2. Open the application and Click on the '+' symbol and select Desktop to add a new connection."
 3. In the new window that appears, provide the following details and save the connection.
-  * PC Name : *Provide the **Public IP Address** of the **labvm** *
+  * PC Name : *Provide the **Public IP Address** of the **labvm***
   * Connection Name : *Provide any connection name*
 4.	Save the connection and close the dialog box.
 5. Double click the newly created connection. If the "**verify certificate**" dialog appears, click on continue.
