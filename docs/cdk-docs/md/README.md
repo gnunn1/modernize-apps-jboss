@@ -48,7 +48,7 @@ cases for reactive microservices.
 
 1. You can register for the lab by using the URL provided by the instructor. Open a browser, navigate to the given URL. Once you get in to the registration page, provide your details and click on **Submit**. Then in the next page that appear, click on **Launch lab** to start the deployment. 
 <kbd>![](Images/register.jpg)</kbd>
-2. Once the deployment is completed, you will recieve the lab environment details via Email. Ensure that the lab environment details consist of two sections, **Azure Credentials** and **Environment Details.**
+2. Once the deployment is completed, you will receive the lab environment details via Email. Ensure that the lab environment details consist of two sections, **Azure Credentials** and **Environment Details.**
 <kbd>![](Images/lab-details.jpg)</kbd>
 3. Navigate to https://portal.azure.com and login to **Azure** using the credentials given in the lab Environment details page.
 4. Once you logged in to Azure, click on **Resource Groups** from the Menu bar. </br>
@@ -88,7 +88,7 @@ cases for reactive microservices.
 
 ### For Mac users 
 1. Before beginning, you will need to install the Microsoft Remote Desktop Application from Apple’s App Store:  https://itunes.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12
-2. 1.	Open the application and Click on the '+' symbol and select Desktop to add a new connection.
+2. Open the application and Click on the '+' symbol and select Desktop to add a new connection."
 3. In the new window that appears, provide the following details and save the connection.
   * PC Name : <Provide the **Public IP Address** of the **labvm**>
   * Connection Name : <provide any connection name> 
