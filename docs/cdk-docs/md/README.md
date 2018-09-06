@@ -91,7 +91,7 @@ cases for reactive microservices.
 2. Open the application and Click on the '+' symbol and select Desktop to add a new connection."
 3. In the new window that appears, provide the following details and save the connection.
   * PC Name : <Provide the **Public IP Address** of the **labvm**>
-  * Connection Name : <provide any connection name> 
+  * Connection Name : <Provide any connection name>
 4.	Save the connection and close the dialog box.
 5. Double click the newly created connection. If the "**verify certificate**" dialog appears, click on continue.
 6. Then the following dialog will appear and ask you to authenticate.  Use your Jump VM Username and Jump VM Password to do this.</br>
