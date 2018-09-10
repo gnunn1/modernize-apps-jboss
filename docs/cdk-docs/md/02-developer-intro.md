@@ -29,9 +29,7 @@ Both Developers and Operators communicate with the OpenShift Platform via one of
 in the last scenario. This tool is written in the Go programming language and is a single executable that is provided for
 Windows, OS X, and the Linux Operating Systems.
 * **Web Console** -  OpenShift also provides a feature rich Web Console that provides a friendly graphical interface for
-interacting with the platform. You can always access the Web Console using the link provided just above
-the Terminal window on the right:
- * ![OpenShift Console Tab](../../../assets/developer-intro/openshift-console-tab.png)
+interacting with the platform. 
 * **REST API** - Both the command line tool and the web console actually communicate to OpenShift via the same method,
 the REST API.  Having a robust API allows users to create their own scripts and automation depending on
 their specific requirements.  For detailed information about the REST API, check out the [official documentation](https://docs.openshift.org/latest/rest_api/index.html).
@@ -211,7 +209,7 @@ Verify that you can access the monolith by clicking on the
 exposed OpenShift route at 
 
 `http://www-coolstore-dev.$ROUTE_SUFFIX`
-to open up the sample application in a separate browser tab.
+to open up the sample application in a separate browser tab (You can cut-and-paste the field "Requested Host:" from the "oc describe route www" above).
 
 You should also be able to see both the CoolStore monolith and its database
 running in separate pods:
@@ -348,7 +346,7 @@ Manually copying is cool, but what about automatic live copying on change? That'
 
 Let's clean up the temp files we used. Execute:
 
-`rm -f version.txt hello.txt`
+`rm -f version.txt`
 
 ## Live Synchronization of Project Files
 
@@ -538,9 +536,7 @@ So far you have built and deployed the app manually to OpenShift in the _dev_ en
 it's convenient for local development, it's an error-prone way of delivering software when
 extended to test and production environments.
 
-Continuous Delivery (CD) refers to a set of practices with the intention of automating 
-various aspects of delivery software. One of these practices is called delivery pipeline 
-which is an automated process to define the steps a change in code or configuration has 
+Continuous Delivery (CD) refers to a set of practices with the intention of automating various aspects of software delivery. One of these practices is called delivery pipeline which is an automated process to define the steps a change in code or configuration has 
 to go through in order to reach upper environments and eventually to production. 
 
 OpenShift simplifies building CI/CD Pipelines by integrating
@@ -670,8 +666,7 @@ and to change the pipeline you'd edit the _Jenkinsfile_ in the source base. For 
 just edit it directly to add the necessary changes. You can edit it with the `oc` command but we'll
 use the Web Console.
 
-Open the `monolith-pipeline` configuration page in the Web Console (you can navigate to it from
-_Builds -> Pipelines_ but here's a quick link):
+Open the monolith-pipeline configuration page in the Web Console (you can navigate to it from Builds -> Pipelines  and then clicking on "monolith-pipeline" but here's a quick link):
 
 * Pipeline Config page at 
 
@@ -748,11 +743,10 @@ The same pipeline progress will be shown, however before deploying to prod, you 
 
 ![Prod](../../../assets/developer-intro/pipe-prompt.png)
 
-Click on the link for `Input Required`. This will open a new tab and direct you to Jenkins itself, where you can login with
-the same credentials as OpenShift:
+Click on the link for Input Required. This will open a new tab and direct you to Jenkins itself, where you can login with the same credentials as OpenShift:
 
-* Username: `developer`
-* Password: `developer`
+* Username: ocpadmin
+* Password: *cut-and-paste provided OPENSHIFTPASSWORD from lab registration email*
 
 Accept the browser certificate warning and the Jenkins/OpenShift permissions, and then you'll find yourself at the approval prompt:
 
