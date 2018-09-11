@@ -13,14 +13,14 @@ microservices using different technologies, with the eventual goal of re-archite
 distributed microservices. Later on we'll explore how you can better manage and monitor the application after
 it is re-architected.
 
-In this scenario you will learn more about [WildFly Swarm](https://wildfly-swarm.io), one of the runtimes
+In this scenario you will learn more about [Thorntail (ex-WildFly Swarm)](https://wildfly-swarm.io), one of the runtimes
 included in [Red Hat OpenShift Application Runtimes](https://developers.redhat.com/products/rhoar). WildFly
 Swarm is a great place to start since our application is a Java EE application, and your skills as a Java EE
-developer will naturally translate to the world of WildFly Swarm.
+developer will naturally translate to the world of Thorntail (ex-WildFly Swarm).
 
-You will implement one component of the monolith as a WildFly Swarm microservice and modify it to address
+You will implement one component of the monolith as a Thorntail (ex-WildFly Swarm) microservice and modify it to address
 microservice concerns, understand its structure, deploy it to OpenShift and exercise the interfaces between
-WildFly Swarm apps, microservices, and OpenShift/Kubernetes.
+Thorntail (ex-WildFly Swarm) apps, microservices, and OpenShift/Kubernetes.
 
 ## Goals of this scenario
 
@@ -29,7 +29,7 @@ But after this scenario, you should end up with something like:
 
 ![Logo](../../../assets/mono-to-micro-part-1/goal.png)
 
-## What is WildFly Swarm? 
+## What is Thorntail (ex-WildFly Swarm)? 
 
 ![Logo](../../../assets/mono-to-micro-part-1/swarm-logo.png)
 
@@ -38,18 +38,18 @@ dependencies and deployed in an application server. Multiple Java EE application
 were typically deployed in the same application server. This model is well understood in 
 the development teams and has been used over the past several years.
 
-[WildFly Swarm](http://wildfly-swarm.io) offers an innovative approach to packaging and 
+[Thorntail (ex-WildFly Swarm)](http://wildfly-swarm.io) offers an innovative approach to packaging and 
 running Java EE applications by 
 packaging them with just enough of the Java EE server runtime to be able to run them directly 
 on the JVM using **java -jar** For more details on various approaches to packaging Java 
 applications,
 read [this blog post](https://developers.redhat.com/blog/2017/08/24/the-skinny-on-fat-thin-hollow-and-uber).
 
-WildFly Swarm is based on WildFly and it's compatible with 
+Thorntail (ex-WildFly Swarm) is based on WildFly and it's compatible with 
 [Eclipse MicroProfile](https://microprofile.io), which is a community effort to standardized the subset of Java EE standards 
 such as JAX-RS, CDI and JSON-P that are useful for building microservices applications.
 
-Since WildFly Swarm is based on Java EE standards, it significantly simplifies refactoring 
+Since Thorntail (ex-WildFly Swarm) is based on Java EE standards, it significantly simplifies refactoring 
 existing Java EE application to microservices and allows much of existing code-base to be 
 reused in the new services.
 
@@ -73,7 +73,7 @@ git pull --quiet
 
 ## Examine the sample project
 
-The sample project shows the components of a basic WildFly Swarm project laid out in different
+The sample project shows the components of a basic Thorntail (ex-WildFly Swarm) project laid out in different
 subdirectories according to Maven best practices.
 
 **1. Examine the Maven project structure.**
@@ -109,7 +109,7 @@ Once built, the resulting *jar* is located in the **target** directory:
 
 The listed jar archive, **inventory-1.0.0-SNAPSHOT-swarm.jar** , is an uber-jar with
 all the dependencies required packaged in the *jar* to enable running the
-application with **java -jar**. WildFly Swarm also creates a *war* packaging as a standard Java EE web app
+application with **java -jar**. Thorntail (ex-WildFly Swarm) also creates a *war* packaging as a standard Java EE web app
 that could be deployed to any Java EE app server (for example, JBoss EAP, or its upstream WildFly project).
 
 Now let's write some code and create a domain model, service interface and a RESTful endpoint to access inventory:
@@ -122,7 +122,7 @@ Now let's write some code and create a domain model, service interface and a RES
 
 With our skeleton project in place, let's get to work defining the business logic.
 
-The first step is to define the model (definition) of an Inventory object. Since WildFly Swarm uses JPA,
+The first step is to define the model (definition) of an Inventory object. Since Thorntail (ex-WildFly Swarm) uses JPA,
 we can re-use the same model definition from our monolithic application - no need to re-write or re-architect!
 
 Create a new Java class named `Inventory.java` in
@@ -211,7 +211,7 @@ Review the **Inventory** domain model and note the JPA annotations on this class
 the class as a JPA entity, **@Table** customizes the table creation process by defining a table
 name and database constraint and **@Id** marks the primary key for the table.
 
-WildFly Swarm configuration is done to a large extent through detecting the intent of the
+Thorntail (ex-WildFly Swarm) configuration is done to a large extent through detecting the intent of the
 developer and automatically adding the required dependencies configurations to make sure it can
 get out of the way and developers can be productive with their code rather than Googling for
 configuration snippets. As an example, configuration database access with JPA is done
@@ -311,7 +311,7 @@ create a new RESTful endpoint that uses this service.
 
 ## Create RESTful Endpoints
 
-WildFly Swarm uses JAX-RS standard for building REST services. Create a new Java class named
+Thorntail (ex-WildFly Swarm) uses JAX-RS standard for building REST services. Create a new Java class named
 `InventoryEndpoint.java` in `com.redhat.coolstore.rest` package with the following
 content by clicking on *Copy to Editor*:
 
@@ -378,7 +378,7 @@ You should see a **BUILD SUCCESS** in the build logs.
 
 ## Test Locally
 
-Using the WildFly Swarm maven plugin (predefined in `pom.xml`), you can conveniently run the application locally and test the endpoint.
+Using the Thorntail (ex-WildFly Swarm) maven plugin (predefined in `pom.xml`), you can conveniently run the application locally and test the endpoint.
 
 `mvn wildfly-swarm:run`
 
@@ -387,7 +387,7 @@ Using the WildFly Swarm maven plugin (predefined in `pom.xml`), you can convenie
 Once the application is done initializing you should see:
 
 ```
-INFO  [org.wildfly.swarm] (main) WFSWARM99999: WildFly Swarm is Ready
+INFO  [org.wildfly.swarm] (main) WFSWARM99999: Thorntail (ex-WildFly Swarm) is Ready
 ```
 
 Running locally using `wildfly-swarm:run` will use an in-memory database with default credentials. In a production application you
@@ -428,7 +428,7 @@ The REST API returned a JSON object representing the inventory count for this pr
 
 **4. Stop the application**
 
-Before moving on, click in the first terminal window where WildFly Swarm is running
+Before moving on, click in the first terminal window where Thorntail (ex-WildFly Swarm) is running
 and then press `CTRL-C` to stop the running application! (or click this command to issue
 a `CTRL-C` for you: `clear`)
 
@@ -442,9 +442,9 @@ This indicates the application is stopped.
 
 ## Congratulations
 
-You have now successfully created your first microservice using WildFly Swarm and implemented a basic RESTful
+You have now successfully created your first microservice using Thorntail (ex-WildFly Swarm) and implemented a basic RESTful
 API on top of the Inventory database. Most of the code is the same as was found in the monolith, demonstrating how
-easy it is to migrate existing monolithic Java EE applications to microservices using WildFly Swarm.
+easy it is to migrate existing monolithic Java EE applications to microservices using Thorntail (ex-WildFly Swarm).
 
 In next steps of this scenario we will deploy our application to OpenShift Container Platform and then start
 adding additional features to take care of various aspects of cloud native microservice development.
@@ -507,7 +507,7 @@ This will deploy the database to our new project. Wait for it to complete:
 **2. Build and Deploy**
 
 Red Hat OpenShift Application Runtimes includes a powerful maven plugin that can take an
-existing WildFly Swarm application and generate the necessary Kubernetes configuration.
+existing Thorntail (ex-WildFly Swarm) application and generate the necessary Kubernetes configuration.
 You can also add additional config, like ``src/main/fabric8/inventory-deployment.yml`` which defines
 the deployment characteristics of the app (in this case we declare a few environment variables which map our credentials
 stored in the secrets file to the application), but OpenShift supports a wide range of [Deployment configuration options](https://docs.openshift.org/latest/architecture/core_concepts/deployments.html) for apps).
@@ -571,11 +571,11 @@ to accept requests.
 
 ## What is a Fraction?
 
-WildFly Swarm is defined by an unbounded set of capabilities. Each piece of functionality is called a fraction.
+Thorntail (ex-WildFly Swarm) is defined by an unbounded set of capabilities. Each piece of functionality is called a fraction.
 Some fractions provide only access to APIs, such as JAX-RS or CDI; other fractions provide higher-level capabilities,
 such as integration with RHSSO (Keycloak).
 
-The typical method for consuming WildFly Swarm fractions is through Maven coordinates, which you add to the pom.xml
+The typical method for consuming Thorntail (ex-WildFly Swarm) fractions is through Maven coordinates, which you add to the pom.xml
 file in your application. The functionality the fraction provides is then packaged with your application into an
 _Uberjar_.  An uberjar is a single Java .jar file that includes everything you need to execute your application.
 This includes both the runtime components you have selected, along with the application logic.
@@ -598,14 +598,14 @@ whether an application is in a state where it should begin to receive incoming t
 is used to determine whether an application is still in an acceptable state. If the liveness probe fails,
 OpenShift will destroy the pod and replace it with a new one.
 
-In our case we will implement the health check logic in a REST endpoint and let WildFly Swarm publish
+In our case we will implement the health check logic in a REST endpoint and let Thorntail (ex-WildFly Swarm) publish
 that logic on the `/health` endpoint for use with OpenShift.
 
 ** 2. Add `monitor` fraction**
 
 First, open the `pom.xml` file.
 
-WildFly Swarm includes the `monitor` fraction which automatically adds health check infrastructure to your
+Thorntail (ex-WildFly Swarm) includes the `monitor` fraction which automatically adds health check infrastructure to your
 application when it is included as a fraction in the project. Open the file to insert the new dependencies
 into the `pom.xml` file at the `<!-- Add monitor fraction-->` marker:
 
@@ -634,7 +634,7 @@ The logic will be put into a new Java class.
 Click this link to create and open the file which will contain the new class: `src/main/java/com/redhat/coolstore/rest/HealthChecks.java`
 
 Methods in this new class will be annotated with both the JAX-RS annotations as well as
-[WildFly Swarm's `@Health` annotation](https://wildfly-swarm.gitbooks.io/wildfly-swarm-users-guide/content/advanced/monitoring.html), indicating it should be used as a health check endpoint.
+[Thorntail (ex-WildFly Swarm)'s `@Health` annotation](https://wildfly-swarm.gitbooks.io/wildfly-swarm-users-guide/content/advanced/monitoring.html), indicating it should be used as a health check endpoint.
 
 **2. Add logic**
 
@@ -675,7 +675,7 @@ public class HealthChecks {
 
 The `check()` method exposes an HTTP GET endpoint which will return the status of the service. The logic of
 this check does a simple query to the underlying database to ensure the connection to it is stable and available.
-The method is also annotated with WildFly Swarm's `@Health` annotation, which directs WildFly Swarm to expose
+The method is also annotated with Thorntail (ex-WildFly Swarm)'s `@Health` annotation, which directs Thorntail (ex-WildFly Swarm) to expose
 this endpoint as a health check at `/health`.
 
 With our new health check in place, we'll need to build and deploy the updated application in the next step.
@@ -691,7 +691,7 @@ With our health check in place, lets rebuild and redeploy using the same command
 
 You should see a **BUILD SUCCESS** at the end of the build output.
 
-During build and deploy, you'll notice WildFly Swarm adding in health checks for you:
+During build and deploy, you'll notice Thorntail (ex-WildFly Swarm) adding in health checks for you:
 
 ```
 [INFO] F8: wildfly-swarm-health-check: Adding readiness probe on port 8080, path='/health', scheme='HTTP', with initial delay 10 seconds
@@ -799,7 +799,7 @@ re-connected to the new service and successfully accessed the inventory once aga
 
 ## Summary
 
-In this scenario you learned a bit more about what WildFly Swarm is, and how it can be used to create
+In this scenario you learned a bit more about what Thorntail (ex-WildFly Swarm) is, and how it can be used to create
 modern Java microservice-oriented applications.
 
 You created a new Inventory microservice representing functionality previously implmented in the monolithic
@@ -807,11 +807,11 @@ CoolStore application. For now this new microservice is completely disconnected 
 not very useful on its own. In future steps you will link this and other microservices into the monolith to
 begin the process of [strangling the monolith](https://www.martinfowler.com/bliki/StranglerApplication.html).
 
-WildFly Swarm brings in a number of concepts and APIs from the Java EE community, so your existing
+Thorntail (ex-WildFly Swarm) brings in a number of concepts and APIs from the Java EE community, so your existing
 Java EE skills can be re-used to bring your applications into the modern world of containers,
 microservices and cloud deployments.
 
-WildFly Swarm is one of many components of Red Hat OpenShift Application Runtimes. In the next scenario
+Thorntail (ex-WildFly Swarm) is one of many components of Red Hat OpenShift Application Runtimes. In the next scenario
 you'll use Spring Boot, another popular framework, to implement additional microservices. Let's go!
 
 
