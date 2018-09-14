@@ -537,9 +537,6 @@ mvn clean && \
 **2. View the results**
 
 Navigate back to the RDP session and reload the report web page, index.html.
-
-> CDK USERS: If you running this outside the Katacoda environment, you can browse directly by opening `file:///${HOME}/rhamt-reports/monolith` in your browser
-
 And verify that it now reports 0 Story Points:
 
 You have successfully migrated
@@ -718,8 +715,6 @@ First, open a browser and navigate to the OpenShift console URL provided in the 
 
 This will open the openshift console.
 
-> If you running this outside the Katacoda environment, you will need to browse to your $OPENSHIFT_MASTER manually.
-
 ![OpenShift Console](../../../assets/moving-existing-apps/openshift-login.png)
 
 Login using:
@@ -727,7 +722,6 @@ Login using:
 * Username: provide the openshift cluster username from the lab details page.
 * Password: provide the openshift cluster password from the lab details page.
 
-> If you running this outside the Katacoda environment, you will need to login with proper credentials supplied to you ahead of time
 
 You will see the OpenShift landing page:
 
