@@ -1,5 +1,0 @@
-web:
-  build: .
-  environment:
-    VIRTUAL_HOST: 'openshift-modernize-apps.katacoda.com'
-  restart: always
