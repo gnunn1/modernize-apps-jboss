@@ -125,8 +125,7 @@ With our skeleton project in place, let's get to work defining the business logi
 The first step is to define the model (definition) of an Inventory object. Since Thorntail (ex-WildFly Swarm) uses JPA,
 we can re-use the same model definition from our monolithic application - no need to re-write or re-architect!
 
-Create a new Java class named `Inventory.java` in
-`com.redhat.coolstore.model` package with the following code, identical to the monolith code (click **Copy To Editor** to create the class):
+Create a new file named `Inventory.java` in directory `src/main/java/com/redhat/coolstore/model` for the Inventory Java class in package `com.redhat.coolstore.model` with the following code, identical to the monolith code:
 
 ```java
 package com.redhat.coolstore.model;
@@ -237,8 +236,7 @@ If builds successfully, continue to the next step to create a new service.
 
 In this step we will mirror the abstraction of a _service_ so that we can inject the Inventory _service_ into
 various places (like a RESTful resource endpoint) in the future. This is the same approach that our monolith
-uses, so we can re-use this idea again. Create an **InventoryService** class in the
-`com.redhat.coolstore.service` package by clicking **Copy To Editor** with the below code:
+uses, so we can re-use this idea again. Create a new file named **InventoryService.java** in directory `src/main/java/com/redhat/coolstore/service` for the InventoryServices Java class in package `com.redhat.coolstore.service` with the code below:
 
 ```java
 package com.redhat.coolstore.service;
@@ -311,9 +309,7 @@ create a new RESTful endpoint that uses this service.
 
 ## Create RESTful Endpoints
 
-Thorntail (ex-WildFly Swarm) uses JAX-RS standard for building REST services. Create a new Java class named
-`InventoryEndpoint.java` in `com.redhat.coolstore.rest` package with the following
-content by clicking on *Copy to Editor*:
+Thorntail (ex-WildFly Swarm) uses JAX-RS standard for building REST services. Create a new file named **InventoryEndpoint.java** in directory `src/main/java/com/redhat/coolstore/rest` for the InventoryEndpoint Java class in package `com.redhat.coolstore.rest` with the following content:
 
 ```java
 package com.redhat.coolstore.rest;
@@ -396,13 +392,8 @@ testing.
 
 **3. Test the application**
 
-To test the running application, click on the **Local Web Browser** tab in the console frame of this browser window. This will open another tab or window of your browser pointing to port 8080 on your client.
-
-![Local Web Browser Tab](../../../assets/mono-to-micro-part-1/web-browser-tab.png)
-
-> or use this at 
-
-`http://localhost:8080` link.
+Navigate back to the RDP session and open a tab in your browser pointing to port 8080, by entering the following URL in your browser address field, as follows:
+`http://localhost:8080`
 
 You should now see a html page that looks like this
 
@@ -467,20 +458,12 @@ Create a new project for the _inventory_ service:
 
 **3. Open the OpenShift Web Console**
 
-You should be familiar with the OpenShift Web Console by now!
-Click on the "OpenShift Console" tab:
-
-![OpenShift Console Tab](../../../assets/mono-to-micro-part-1/openshift-console-tab.png)
-
-And navigate to the new _inventory_ project overview page (or use this quick link at 
-
+Open the OpenShift Web Console (refer to registration email for URL, username and password to use for this) and navigate to the new inventory project overview page or use this quick link at:
 `https://$OPENSHIFT_MASTER/console/project/inventory/`
 
 ![Web Console Overview](../../../assets/mono-to-micro-part-1/overview.png)
 
 There's nothing there now, but that's about to change.
-
-
 
 ## Deploy to OpenShift
 
@@ -491,11 +474,7 @@ Let's deploy our new inventory microservice to OpenShift!
 Our production inventory microservice will use an external database (PostgreSQL) to house inventory data.
 First, deploy a new instance of PostgreSQL by executing:
 
-`oc new-app -e POSTGRESQL_USER=inventory \
-             -e POSTGRESQL_PASSWORD=mysecretpassword \
-             -e POSTGRESQL_DATABASE=inventory \
-             openshift/postgresql:latest \
-             --name=inventory-database`
+`oc new-app -e POSTGRESQL_USER=inventory -e POSTGRESQL_PASSWORD=mysecretpassword -e POSTGRESQL_DATABASE=inventory openshift/postgresql:latest --name=inventory-database`
 
 > **NOTE:** If you change the username and password you also need to update `src/main/fabric8/credential-secret.yml` which contains
 the credentials used when deploying to OpenShift.
@@ -631,7 +610,7 @@ We are now ready to define the logic of our health check endpoint.
 
 The logic will be put into a new Java class.
 
-Click this link to create and open the file which will contain the new class: `src/main/java/com/redhat/coolstore/rest/HealthChecks.java`
+Create and open the file which will contain the new class : `src/main/java/com/redhat/coolstore/rest/HealthChecks.java`
 
 Methods in this new class will be annotated with both the JAX-RS annotations as well as
 [Thorntail (ex-WildFly Swarm)'s `@Health` annotation](https://wildfly-swarm.gitbooks.io/wildfly-swarm-users-guide/content/advanced/monitoring.html), indicating it should be used as a health check endpoint.
@@ -640,7 +619,7 @@ Methods in this new class will be annotated with both the JAX-RS annotations as 
 
 Next, let's fill in the class by creating a new RESTful endpoint which will be used by OpenShift to probe our services.
 
-Click on **Copy To Editor** below to implement the logic.
+Copy the code fragment below into the newly created file to implement the logic.
 
 ```java
 package com.redhat.coolstore.rest;
@@ -706,9 +685,10 @@ To verify that everything is started, run the following command and wait for it 
 Once the project is deployed, you should be able to access the health check logic
 at the `/health` endpoint using a simple _curl_ command. This is the same API that OpenShift will repeatedly poll to determine application health.
 
-Click here to try it (you may need to try a few times until the project is fully deployed):
+Click here to try it (the URL before "/health" is the Route for your Inventory service, which you can obtain from the OpenShift Web Console overview page). You may need to try a few times until the project is fully deployed:
 
-``curl http://inventory-inventory.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/health``
+``curl http://inventory-inventory.40.87.67.169.nip.io/health``
+
 
 You should see a JSON response like:
 
