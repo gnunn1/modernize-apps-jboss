@@ -60,6 +60,9 @@ cases for reactive microservices.
 7. **For windows Users :** Open **Putty**, **paste** the copied IP Address and click on **Open**. Then login with the **JumpVM Username** and **JumpVM Password** provided in the lab environment details page.</br>
 <kbd>![](Images/putty.jpg)</kbd>
 8. **For Mac Users :** Select "**Connect**" from the virtual machine page, then select "**SSH**" tab, then click on the "**click-to-Copy**" icon at the end of the line, and finally paste the SSH string to an Xterm on Mac OS.
+```
+Note: Password for demouser is demoPassword1!
+````
 <kbd>![](Images/macssh.jpg)</kbd>
 
 
