@@ -172,7 +172,10 @@ locally, by using the `spring-boot` maven plugin.
 
 Run the application by executing the below command:
 
-``mvn spring-boot:run``
+```
+mvn spring-boot:run
+```
+
 Wait for it to complete startup and report `Started RestApplication in ***** seconds (JVM running for ******)`
 
 **3. Verify the application**
@@ -201,8 +204,6 @@ In next step of this scenario, we will add the logic to be able to read a list o
 
 
 ## Create Domain Objects
-
-
 
 ## Creating a test
 
@@ -333,7 +334,6 @@ public List<Product> readAll() {
 }
 ```
 
-The `ProductRepositoryTest` also used another method called `findById(String id)` that should return a Product. The implementation of that method using the `JdbcTemplate` and `RowMapper` looks like this (click to add it):
 The `ProductRepositoryTest` also used another method called `findById(String id)` that should return a Product. The implementation of that method using the `JdbcTemplate` and `RowMapper` looks like this (copy and paste the following code under the comment `//TODO: Create a method for returning one product`):
 
 ```java
