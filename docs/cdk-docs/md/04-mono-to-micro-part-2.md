@@ -92,7 +92,7 @@ we have for example prepared a simple html-based UI file for you. Except for the
 matches very well what you would get if you generated an empty project from the [Spring Initializr](https://start.spring.io) web
 page. For the moment you can ignore the content of the `fabric8/` folder (we will discuss this later).
 
-One this that differs slightly is the `pom.xml`. Please open the and examine it a bit closer (but do not change anything
+One file that differs slightly is the `pom.xml`. Please open the and examine it a bit closer (but do not change anything
 at this time)
 
 ``pom.xml``
@@ -136,7 +136,7 @@ To add Apache Tomcat to our project all we have to do is to add the following li
     </dependency>
 ```
 
-We will also make use of Java Persistance API (JPA) so we need to add the following to `pom.xml` at the `<!-- TODO: Add data jpa dependency here -->` marker:
+We will also make use of Java Persistence API (JPA) so we need to add the following to `pom.xml` at the `<!-- TODO: Add data jpa dependency here -->` marker:
 
 ```java
     <dependency>
@@ -173,23 +173,13 @@ locally, by using the `spring-boot` maven plugin.
 Run the application by executing the below command:
 
 ``mvn spring-boot:run``
-
->**NOTE:** The Katacoda terminal window is like your local terminal. Everything that you run here you should
-be able to execute on your local computer as long as you have a `Java SDK 1.8` and `Maven`. In later steps, we
-will also use the `oc` command line tool.
-
 Wait for it to complete startup and report `Started RestApplication in ***** seconds (JVM running for ******)`
 
 **3. Verify the application**
 
-To begin with, click on the **Local Web Browser** tab in the console frame of this browser window, which will open another tab or window of your browser pointing to port 8081 on your client.
+Navigate back to the RDP session and open a tab in your browser pointing to port 8081, by entering the following URL in your browser address field, as follows:
 
-![Local Web Browser Tab](../../../assets/mono-to-micro-part-2/web-browser-tab.png)
-
-or use this at 
-
-`http://localhost:8081` link.
-
+``http://localhost:8081``
 You should now see an HTML page that looks like this:
 
 ![Local Web Browser Tab](../../../assets/mono-to-micro-part-2/web-page.png)
@@ -198,7 +188,7 @@ You should now see an HTML page that looks like this:
 
 **4. Stop the application**
 
-Before moving on, click here: `clear` to stop the running application.
+Before moving on, press CTRL-C on your terminal window to stop the running application.
 
 ## Congratulations
 
@@ -214,12 +204,11 @@ In next step of this scenario, we will add the logic to be able to read a list o
 
 
 
-## Creating a test.
+## Creating a test
 
 Before we create the database repository class to access the data it's good practice to create test cases for the different methods that we will use.
 
-Click to open ``src/test/java/com/redhat/coolstore/service/ProductRepositoryTest.java`` to create the empty file and
-then **Copy to Editor** to copy the below code into the file:
+Create and open file `src/test/java/com/redhat/coolstore/service/ProductRepositoryTest.java` and copy the code below into it:
 
 ```java
 package com.redhat.coolstore.service;
@@ -251,18 +240,14 @@ public class ProductRepositoryTest {
 
 ```
 
-Next, inject a handle to the future repository class which will provide access to the underlying data repository. It is
-injected with Spring's `@Autowired` annotation which locates, instantiates, and injects runtime instances of classes automatically,
-and manages their lifecycle (much like Java EE and it's CDI feature). Click to create this code:
+Next, inject a handle to the future repository class which will provide access to the underlying data repository. It is injected with Spring's `@Autowired` annotation which locates, instantiates, and injects runtime instances of classes automatically, and manages their lifecycle (much like Java EE and it's CDI feature). Copy and paste the following code right below the comment `//TODO: Insert Catalog Component here`:
 
 ```java
 @Autowired
 ProductRepository repository;
 ```
-
 The `ProductRepository` should provide a method called `findById(String id)` that returns a product and collect that from the database. We test this by querying for a product with id "444434" which should have name "Pebble Smart Watch". The pre-loaded data comes from the `src/main/resources/schema.sql` file.
-
-Click to insert this code:
+Copy and paste the following code right below the comment ``//TODO: Insert test_readOne here``:
 
 ```java
 @Test
@@ -274,8 +259,7 @@ public void test_readOne() {
 }
 ```
 
-The `ProductRepository` should also provide a methods called `readAll()` that returns a list of all products in the catalog. We test this by making sure that the list contains a "Red Fedora", "Forge Laptop Sticker" and "Oculus Rift".
-Again, click to insert the code:
+The `ProductRepository` should also provide a method called `readAll()` that returns a list of all products in the catalog. We test this by making sure that the list contains a "Red Fedora", "Forge Laptop Sticker" and "Oculus Rift". Again, copy and paste the following code below the comment `//TODO: Insert test_readAll here`:
 
 ```java
 @Test
@@ -292,9 +276,9 @@ public void test_readAll() {
 
 We are now ready to implement the database repository.  
 
-Create the ``src/main/java/com/redhat/coolstore/service/ProductRepository.java`` by clicking the open link.
+Create the file `src/main/java/com/redhat/coolstore/service/ProductRepository.java`.
+Here is the base for the calls, copy and paste the following code into the newly created file:
 
-Here is the base for the calls, click on the copy button to paste it into the editor:
 
 ```java
 package com.redhat.coolstore.service;
@@ -324,14 +308,13 @@ public class ProductRepository {
 
 > NOTE: That the class is annotated with `@Repository`. This is a feature of Spring that makes it possible to avoid a lot of boiler plate code and only write the implementation details for this data repository. It also makes it very easy to switch to another data storage, like a NoSQL database.
 
-Spring Data provides a convenient way for us to access data without having to write a lot of boiler plate code. One way to do that is to use a `JdbcTemplate`. First we need to autowire that as a member to `ProductRepository`. Click to add it:
+Spring Data provides a convenient way for us to access data without having to write a lot of boiler plate code. One way to do that is to use a `JdbcTemplate`. First we need to autowire that as a member to `ProductRepository`. Copy and paste the following code under the comment `//TODO: Autowire the jdbcTemplate here`:
 
 ```java
 @Autowired
 private JdbcTemplate jdbcTemplate;
 ```
-
-The `JdbcTemplate` require that we provide a `RowMapper`so that it can map between rows in the query to Java Objects. We are going to define the `RowMapper` like this (click to add it):
+The `JdbcTemplate` require that we provide a `RowMapper` so that it can map between rows in the query to Java Objects. We are going to define the `RowMapper` like this (copy and paste the following code under the comment `//TODO: Add row mapper here`):
 
 ```java
 private RowMapper<Product> rowMapper = (rs, rowNum) -> new Product(
@@ -341,7 +324,8 @@ private RowMapper<Product> rowMapper = (rs, rowNum) -> new Product(
         rs.getDouble("price"));
 ```
 
-Now we are ready to create the methods that are used in the test. Let's start with the `readAll()`. It should return a `List<Product>` and then we can write the query as `SELECT * FROM catalog` and use the rowMapper to map that into `Product` objects. Our method should look like this (click to add it):
+Now we are ready to create the methods that are used in the test. Let's start with the `readAll()`. It should return a `List<Product>` and then we can write the query as `SELECT * FROM catalog` and use the rowMapper to map that into `Product` objects. Our method should look like this (copy and paste the following code under the comment `//TODO: Create a method for returning all products`):
+
 
 ```java
 public List<Product> readAll() {
@@ -350,6 +334,7 @@ public List<Product> readAll() {
 ```
 
 The `ProductRepositoryTest` also used another method called `findById(String id)` that should return a Product. The implementation of that method using the `JdbcTemplate` and `RowMapper` looks like this (click to add it):
+The `ProductRepositoryTest` also used another method called `findById(String id)` that should return a Product. The implementation of that method using the `JdbcTemplate` and `RowMapper` looks like this (copy and paste the following code under the comment `//TODO: Create a method for returning one product`):
 
 ```java
 public Product findById(String id) {
@@ -359,8 +344,7 @@ public Product findById(String id) {
 
 The `ProductRepository` should now have all the components, but we still need to tell spring how to connect to the database. For local development we will use the H2 in-memory database. When deploying this to OpenShift we are instead going to use the PostgreSQL database, which matches what we are using in production.
 
-The Spring Framework has a lot of sane defaults that can always seem magical sometimes, but basically all we have todo to setup the database driver is to provide some configuration values. Open ``src/main/resources/application-default.properties`` and add the following properties where the comment says "#TODO: Add database properties"
-Click to add it:
+The Spring Framework has a lot of sane defaults that can always seem magical sometimes, but basically all we have todo to setup the database driver is to provide some configuration values. Open ``src/main/resources/application-default.properties`` and add the following properties where the comment says "#TODO: Add database properties":
 
 ```java 
 spring.datasource.url=jdbc:h2:mem:catalog;DB_CLOSE_ON_EXIT=FALSE
@@ -389,8 +373,7 @@ In next step of this scenario, we will add the logic to expose the database cont
 
 Now you are going to create a service class. Later on the service class will be the one that controls the interaction with the inventory service, but for now it's basically just a wrapper of the repository class. 
 
-Create a new class `CatalogService` by clicking: ``src/main/java/com/redhat/coolstore/service/CatalogService.java``
-
+Create a new file `src/main/java/com/redhat/coolstore/service/CatalogService.java` for a new Java class `CatalogService` 
 And then Open the file to implement the new service:
 
 ```java
@@ -440,7 +423,7 @@ public class CatalogService {
 
 As you can see there is a number of **TODO** in the code, and later we will use these placeholders to add logic for calling the Inventory Client to get the quantity. However for the moment we will ignore these placeholders. 
 
-Now we are ready to create the endpoints that will expose REST service. Let's again first start by creating a test case for our endpoint. We need to endpoints, one that exposes for GET calls to `/services/products` that will return all product in the catalog as JSON array, and the second one exposes GET calls to `/services/product/{prodId}` which will return a single Product as a JSON Object. Let's again start by creating a test case. 
+Now we are ready to create the endpoints that will expose REST service. Let's again first start by creating a test case for our endpoint. We need two endpoints, one that exposes for GET calls to `/services/products` that will return all product in the catalog as JSON array, and the second one exposes GET calls to `/services/product/{prodId}` which will return a single Product as a JSON Object. Let's again start by creating a test case. 
 
 
 Create the test case by opening: ``src/test/java/com/redhat/coolstore/service/CatalogEndpointTest.java``
@@ -563,14 +546,12 @@ public class CatalogEndpoint {
 
 }
 ```
-
-The Spring MVC Framework default uses Jackson to serialize or map Java objects to JSON and vice versa. Because Jackson extends upon JAX-B and does can automatically parse simple Java structures and parse them into JSON and vice verse and since our `Product.java` is very simple and only contains basic attributes we do not need to tell Jackson how to parse between Product and JSON.
-
+By default, the Spring MVC Framework uses Jackson to serialize or map Java objects to JSON and vice versa. Because Jackson extends upon JAX-B and can automatically parse simple Java structures and parse them into JSON and vice versa and since our Product.java is very simple and only contains basic attributes, we do not need to tell Jackson how to parse between Product and JSON.
 Now you can run the `CatalogEndpointTest` and verify that it works.
 
 ``mvn verify -Dtest=CatalogEndpointTest``
 
-Since we now have endpoints that returns the catalog we can also start the service and load the default page again, which should now return the products.
+Since we now have endpoints that return the catalog, we can also start the service and load the default page again, which should now return the products.
 
 Start the application by running the following command
 ``mvn spring-boot:run``
@@ -586,15 +567,9 @@ You should get a full JSON array consisting of all the products:
 ...
 ```
 
-Also click on the **Local Web Browser** tab in the console frame of this browser window, which will open another tab or window of your browser pointing to port 8081 on your client.
+Navigate back to the RDP session and open a tab in your browser pointing to port 8081, by entering the following URL in your browser address field, as follows:
+``http://localhost:8081``
 
-> If you are using CDK, simply browse to http://localhost:8081
-
-![Local Web Browser Tab](../../../assets/mono-to-micro-part-2/web-browser-tab.png)
-
-or use this at 
-
-`http://localhost:8081` link.
 
 You should now see an HTML page that looks like this:
 
@@ -610,8 +585,7 @@ In the next scenario we will also call another service to enrich the endpoint re
 
 ## Before moving on
 
-Be sure to stop the service by clicking on the first Terminal window and typing `CTRL-C` (or
-click `clear` to do it for you).
+Be sure to stop the service by clicking on the first Terminal window and typing `CTRL-C`.
 
 ## Congratulations!
 
@@ -672,9 +646,8 @@ Tests run: 4, Failures: 2, Errors: 0, Skipped: 0
 [INFO] ------------------------------------------------------------------------
 ```
 
-Again the test fails because we are trying to call the Inventory service which is not running. We will soon implement the code to call the inventory service, but first
-we need a away to test this service without having to really on the inventory services to be up an running. For that we are going to use an API Simulator
-called [HoverFly](http://hoverfly.io) and particular it's capability to simulate remote APIs. HoverFly is very convenient to use with Unit test and all we have to do is
+
+Again the test fails because we are trying to call the Inventory service which is not running. We will soon implement the code to call the inventory service, but first we need a way to test this service without having to rely on the inventory services to be up and running. For that, we are going to use an API Simulator called [HoverFly](http://hoverfly.io) and particular it's capability to simulate remote APIs. HoverFly is very convenient to use with Unit test and all we have to do is
 to add a `ClassRule` that will simulate all calls to inventory. Open the file to insert the
 code at the `//TODO: Add ClassRule for HoverFly Inventory simulation` marker:
 
@@ -690,15 +663,16 @@ public static HoverflyRule hoverflyRule = HoverflyRule.inSimulationMode(dsl(
 ));
 ```
 
-This `ClassRule` means that if our tests are trying to call our inventory url Howeverfly will intercept this and respond with our hard coded response instead.
+This `ClassRule` means that if our tests are trying to call our inventory url, Hoverfly will intercept this and respond with our hard coded response instead.
 
 **Implementing the Inventory Client**
 
 Since we now have a nice way to test our service-to-service interaction we can now create the client that calls the Inventory. Netflix has provided some nice extensions to the Spring Framework that are mostly captured in the Spring Cloud project, however Spring Cloud is mainly focused on Pivotal Cloud Foundry and because of that Red Hat and others have contributed Spring Cloud Kubernetes to the Spring Cloud project, which enables the same functionallity for Kubernetes based platforms like OpenShift. 
 
-The inventory client will use a Netflix project called _Feign_, which provides a nice way to avoid having to write boilerplate code. Feign also integrate with Hystrix which gives us capability to Circute Break calls that doesn't work. We will discuss this more later, but let's start with the implementation of the Inventory Client. Using Feign all we have todo is to create a interface that details which parameters and return type we expect, annotate it with `@RequestMapping` and provide some details and then annotate the interface with `@Feign` and provide it with a name.
+The inventory client will use a Netflix project called _Feign_, which provides a nice way to avoid having to write boilerplate code. Feign also integrates with Hystrix which gives us the capability to Circuit Break calls that don't work. We will discuss this more later, but let's start with the implementation of the Inventory Client. Using Feign, all we have to do is to create an interface that details which parameters and return type we expect, annotate it with `@RequestMapping` and provide some details and then annotate the interface with `@Feign` and provide it with a name.
 
-Create the Inventory client by clicking ``src/main/java/com/redhat/coolstore/client/InventoryClient.java``
+Create and open a file named `src/main/java/com/redhat/coolstore/client/InventoryClient.java` for the Inventory client.
+
 
 Add the followng small code to the file:
 
@@ -728,7 +702,7 @@ There is one more thing that we need to do which is to tell Feign where the inve
 
 Open ``src/main/resources/application-default.properties``
 
-And add these properties by clicking **Copy to Editor** and adding to the `#TODO: Configure netflix libraries` marker:
+And add these properties by copying and pasting the following lines at the `#TODO: Configure netflix libraries` marker:
 
 ```java
 inventory.ribbon.listOfServers=inventory:8080
@@ -749,7 +723,7 @@ And autowire (e.g. inject) the client into it by inserting this at the `//TODO: 
 InventoryClient inventoryClient;
 ```
 
-Next, update the `read(String id)` method at the comment `//TODO: Update the quantity for the product by calling the Inventory service` add the following:
+Next, update the `read(String id)` method at the comment `//TODO: Update the quantity for the product by calling the Inventory service` by adding the following:
 
 ```java
 product.setQuantity(inventoryClient.getInventoryStatus(product.getItemId()).getQuantity());
@@ -784,12 +758,9 @@ an external service. But what if that external inventory service does not respon
 
 ## Create a fallback for inventory
 
-In the previous step we added a client to call the Inventory service. Services calling services is a common practice in Microservices Architecture, but as we add more and more services the likelihood of a problem increases dramatically. Even if each service has 99.9% update, if we have 100 of services our estimated up time will only be ~90%. We therefor need to plan for failures to happen and our application logic has to consider that dependent services are not responding.
+In the previous step we added a client to call the Inventory service. Services calling services is a common practice in Microservices Architecture, but as we add more and more services the likelihood of a problem increases dramatically. Even if each service has 99.9% uptime, if we have 100 of services, our estimated uptime would only be ~90%. We therefore need to plan for failures to happen and our application logic has to consider that dependent services are not responding.
 
-In the previous step we used the Feign client from the Netflix cloud native libraries to avoid having to write
-boilerplate code for doing a REST call. However Feign also have another good property which is that we easily create
-fallback logic. In this case we will use static inner class since we want the logic for the fallback to be part of the
-Client and not in a separate class.
+In the previous step, we used the Feign client from the Netflix cloud native libraries to avoid having to write boilerplate code for doing a REST call. However, Feign also has another good property which is that we can easily create fallback logic. In this case, we will use a static inner class since we want the logic for the fallback to be part of the Client and not in a separate class.
 
 Open: `src/main/java/com/redhat/coolstore/client/InventoryClient.java`
 
@@ -811,7 +782,7 @@ static class InventoryClientFallbackFactory implements FallbackFactory<Inventory
 
 ```
 
-After creating the fallback factory all we have todo is to tell Feign to use that fallback in case of an issue, by adding the fallbackFactory property to the `@FeignClient` annotation. Open the file to replace
+After creating the fallback factory all we have to do is to tell Feign to use that fallback in case of an issue, by adding the fallbackFactory property to the `@FeignClient` annotation. Open the file to replace
 it for you at the `@FeignClient(name="inventory")` line:
 
 ```java
@@ -820,7 +791,8 @@ it for you at the `@FeignClient(name="inventory")` line:
 
 **Test the Fallback**
 
-Now let's see if we can test the fallback. Optimally we should create a different test that fails the request and then verify the fallback value, however in because we are limited in time we are just going to change our test so that it returns a server error and then verify that the test fails. 
+Now let's see if we can test the fallback. Optimally we should create a different test that fails the request and then verify the fallback value, however because we are limited by time, we are just going to
+change our test so that it returns a server error and then verify that the test fails. 
 
 Open ``src/test/java/com/redhat/coolstore/service/CatalogEndpointTest.java`` and change the following lines:
 
@@ -873,7 +845,8 @@ public static HoverflyRule hoverflyRule = HoverflyRule.inSimulationMode(dsl(
 Make sure the test works again by running ``mvn verify -Dtest=CatalogEndpointTest``
 
 **Slow running services**
-Having fallbacks is good but that also requires that we can correctly detect when a dependent services isn't responding correctly. Besides from not responding a service can also respond slowly causing our services to also respond slow. This can lead to cascading issues that is hard to debug and pinpoint issues with. We should therefore also have sane defaults for our services. You can add defaults by adding it to the configuration.
+
+Having fallbacks is good but that also requires that we can correctly detect when a dependent service isn't responding correctly. Besides not responding, a service can also respond slowly causing our services to also respond slowly. This can lead to cascading issues that are hard to debug. We should therefore also have sane defaults for our services. You can add defaults by adding them to the configuration.
 
 Open ``src/main/resources/application-default.properties``
 
@@ -909,9 +882,6 @@ As you have seen in previous steps, using the Spring Boot maven plugin (predefin
 Execute the following command to run the new service locally:
 
 `mvn spring-boot:run`
-
->**INFO:** As an uber-jar, it could also be run with `java -jar target/catalog-1.0-SNAPSHOT-swarm.jar` but you don't need to do this now
-
 Once the application is done initializing you should see:
 
 ```
@@ -924,15 +894,8 @@ testing.
 
 **3. Test the application**
 
-To test the running application, click on the **Local Web Browser** tab in the console frame of this browser window. This will open another tab or window of your browser pointing to port 8081 on your client.
-
-Users do not have a **Local Web Browser** link. Use the link below.
-
-![Local Web Browser Tab](../../../assets/mono-to-micro-part-2/web-browser-tab.png)
-
-> or use this at 
-
-`http://localhost:8081` link.
+To test the running application, navigate back to the RDP session and open a tab in your browser pointing to port 8081, by entering the following URL in your browser address field, as follows:
+`http://localhost:8081`
 
 You should now see a html page that looks like this
 
@@ -942,10 +905,7 @@ This is a simple webpage that will access the inventory *every 2 seconds* and re
 
 You can also click the **Fetch Catalog** button to force it to refresh at any time.
 
-To see the raw JSON output using `curl`, you can open an new terminal window by clicking on the plus (+)
-icon on the terminal toolbar and then  choose **Open New Terminal**. You can also click on the following
-command to automatically open a new terminal and run the test:
-
+To see the raw JSON output using curl, open a new Terminal window and enter the following command:
 `curl http://localhost:8081/services/product/329299 ; echo`
 
 You would see a JSON response like this:
@@ -959,15 +919,13 @@ The REST API returned a JSON object representing the inventory count for this pr
 
 **4. Stop the application**
 
-Before moving on, click in the first terminal window where the app is running and then press CTRL-C to stop the running application! Or click `clear` to do it for you.
+Before moving on, click in the first terminal window where the app is running and then press CTRL-C to stop the running application.
 
 ## Congratulations
 
-You have now successfully created your the Catalog service using Spring Boot and implemented basic REST
-API on top of the product catalog database. You have also learned how to deal with service failures. 
+You have now successfully created your Catalog service using Spring Boot and implemented basic REST API on top of the product catalog database. You have also learned how to deal with service failures.
+In next steps of this scenario, we will deploy your application to OpenShift Container Platform and then start adding additional features to take care of various aspects of cloud native microservice development.
 
-In next steps of this scenario we will deploy our application to OpenShift Container Platform and then start
-adding additional features to take care of various aspects of cloud native microservice development.
 
 
 ## Create the OpenShift project
@@ -992,11 +950,7 @@ Now that you've logged into OpenShift, let's deploy our new catalog microservice
 Our production catalog microservice will use an external database (PostgreSQL) to house inventory data.
 First, deploy a new instance of PostgreSQL by executing:
 
-`oc new-app -e POSTGRESQL_USER=catalog \
-             -e POSTGRESQL_PASSWORD=mysecretpassword \
-             -e POSTGRESQL_DATABASE=catalog \
-             openshift/postgresql:latest \
-             --name=catalog-database`
+`oc new-app -e POSTGRESQL_USER=catalog -e POSTGRESQL_PASSWORD=mysecretpassword -e POSTGRESQL_DATABASE=catalog openshift/postgresql:latest --name=catalog-database`
 
 > **NOTE:** If you change the username and password you also need to update `src/main/fabric8/credential-secret.yml` which contains
 the credentials used when deploying to OpenShift.
@@ -1006,8 +960,8 @@ This will deploy the database to our new project. Wait for it to complete:
 `oc rollout status -w dc/catalog-database`
 
 **Update configuration**
-Create the file by clicking: `src/main/resources/application-openshift.properties`
 
+Create and open the file: `src/main/resources/application-openshift.properties`
 Copy the following content to the file:
 ```java
 server.port=8080
@@ -1019,8 +973,7 @@ spring.datasource.driver-class-name=org.postgresql.Driver
 inventory.ribbon.listOfServers=inventory.inventory.svc.cluster.local:8080
 ```
 
->**NOTE:** The `application-openshift.properties` does not have all values of `application-default.properties`, that is because on the values that need to change has to be specified here. Spring will fall back to `application-default.properties` for the other values.
-
+>**NOTE:** The `application-openshift.properties` file does not have all the values of `application-default.properties` because only the values that need to change have to be specified here. Spring will fall back to `application-default.properties` for the other values.
 
 **Build and Deploy**
 
@@ -1077,7 +1030,7 @@ OpenShift we can route these calls to our newly created catalog services instead
 ![Greeting](../../../assets/mono-to-micro-part-2/goal.png)
 
 
-Flow the steps below to create a path based route.
+Follow the steps below to create a path based route.
 
 **1. Obtain hostname of monolith UI from our Dev environment**
 
@@ -1109,7 +1062,7 @@ Leave other values set to their defaults, and click **Create**
 
 **4. Test the route**
 
-Test the route by running `curl http://www-coolstore-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/services/products`
+Test the route by running `curl http://www-coolstore-dev.[[HOSTNAME]]/services/products`
 
 You should get a complete set of products, along with their inventory.
 
