@@ -1076,8 +1076,7 @@ private void getShippingFee(ShoppingCart cart, Handler<AsyncResult<Double>> resu
 }
 ```
 
-Now, lets update the `addProduct` request handler method. Click to add it at the `sendCart(cart,rc); //TODO: update the shipping fee` marker replacing
-the existing `sendCart(cart, rc);` with an updated code block:
+Now, lets update the `addProduct` request handler method. Add it at the `sendCart(cart,rc); //TODO: update the shipping fee` marker replacing the existing `sendCart(cart, rc);` with an updated code block:
 
 ```java
 this.getShippingFee(cart, message -> {
@@ -1091,8 +1090,7 @@ this.getShippingFee(cart, message -> {
 });
 ```
 
-Since we have the special case of product already exists we need to update it twice.  Replace the line with
-`sendCart(cart, rc)` that you just added with another duplicate block:
+Since we have the special case of a product already existing, we need to update it twice. Replace the line with `sendCart(cart, rc)` that you just added with another duplicate block:
 
 ```java
 this.getShippingFee(cart, message -> {
@@ -1141,14 +1139,11 @@ Create a new project for the *cart* service:
 
 **3. Open the OpenShift Web Console**
 
-You should be familiar with the OpenShift Web Console by now!
-Click on the "OpenShift Console" tab:
+Navigate back to the RDP session and open a tab in your browser pointing to the OpenShift Web Console (You should be familiar with it by now!). Navigate to the new catalog project overview page, or use the following quick link:
+``
+https://$OPENSHIFT_MASTER/console/project/cart/
+``
 
-![OpenShift Console Tab](../../../assets/mono-to-micro-part-2/openshift-console-tab.png)
-
-And navigate to the new _catalog_ project overview page (or use this quick link at 
-
-`https://$OPENSHIFT_MASTER/console/project/cart/`
 
 ![Web Console Overview](../../../assets/mono-to-micro-part-2/overview.png)
 
@@ -1174,7 +1169,7 @@ Copy the following content to the file:
 }
 ```
 
->**NOTE:** The `config-openshift.json` does not have all values of `config-default.json`, that is because on the values that need to change has to be specified here. Our solution will fallback to the default configuration for values that aren't configured in the environment specific config.
+>**NOTE:** The `config-openshift.json` does not have all values of `config-default.json`, that is because only the values that need to change have to be specified here. Our solution will fallback to the default configuration for values that aren't configured in the environment specific config.
 
 
 **Build and Deploy**
@@ -1188,9 +1183,8 @@ stored in the secrets file to the application), but OpenShift supports a wide ra
 
 Let's add a deployment.yml that will set the system property to use our `config-openshift.json` config.
 
-Create the file by clicking on open ``src/main/fabric8/deployment.yml``
-
-Add the following content the the file (by clicking on *Copy to Editor* or copying it in directly):
+Create and open the file `src/main/fabric8/deployment.yml`
+Add the following content to the file by copying and pasting:
 
 ```java
 apiVersion: v1
@@ -1209,9 +1203,9 @@ spec:
 
 We also need to add a route.yml like this:
 
-Create the file by clicking on open ``src/main/fabric8/route.yml``
+Create and open the file `src/main/fabric8/route.yml`
+Add the following content to the file by copying and pasting:
 
-Add the following content by clicking on *Copy to Editor* or copying it in directly:
 
 ```java
 apiVersion: v1
@@ -1302,13 +1296,13 @@ Leave other values set to their defaults, and click **Save**
 
 **4. Test the route**
 
-Test the route by running `curl http://www-coolstore-dev.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/services/cart/99999`
+Test the route by running `curl http://www-coolstore-dev.[[HOST_SUBDOMAIN]]/services/cart/99999`
+You should get a complete set of products, along with their inventory."
 
-You should get a complete set of products, along with their inventory.
 
 **5. Test the UI**
 
-Open the monolith UI and observe that the new catalog is being used along with the monolith:
+Navigate back to the RDP session and open a tab in your browser pointing to the monolith UI and observe that the new catalog is being used along with the monolith:
 
 ![Greeting](../../../assets/mono-to-micro-part-2/coolstore-web.png)
 
