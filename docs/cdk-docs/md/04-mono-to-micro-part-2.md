@@ -6,7 +6,7 @@
 
 ## Intro
 In the previous scenarios, you learned how to take an existing monolithic app and refactor a single _inventory_ service using
-WildFly Swarm. Since WildFly Swarm is using Java EE much of the technology from the monolith can be reused directly,
+Thorntail (née WildFly Swarm). Since Thorntail (née WildFly Swarm) is using Java EE much of the technology from the monolith can be reused directly,
 like JPA and JAX-RS. The previous scenario resulted in you creating an inventory service, but so far we haven't started
 _strangling_ the monolith. That is because the inventory service is never called directly by the UI. It's a backend service
 that is only used only by other backend services. In this scenario, you will create the catalog service and the catalog
@@ -989,7 +989,7 @@ To verify that everything is started, run the following command and wait for it 
 
 `oc rollout status -w dc/catalog`
 
->**NOTE:** If you recall in the WildFly Swarm lab Fabric8 detected the `health` _fraction_ and generated health check definitions for us, the same is true for Spring Boot if you have the `spring-boot-starter-actuator` dependency in our project.
+>**NOTE:** If you recall in the Thorntail (née WildFly Swarm) lab Fabric8 detected the `health` _fraction_ and generated health check definitions for us, the same is true for Spring Boot if you have the `spring-boot-starter-actuator` dependency in our project.
 
 **3. Access the application running on OpenShift**
 
