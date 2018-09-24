@@ -268,7 +268,7 @@ You should see output that looks like this:
 ```
 
 **3. Add a router that can serve static content**
-Now let's add a Web server that can server static content, which only requires three lines of code at the `//TODO: Create Router` marker:
+Now let's add a Web server that can serve static content, which only requires three lines of code at the `//TODO: Create Router` marker:
 
 Create the router object:
 ```java
@@ -295,10 +295,10 @@ Now let's restart the application. Execute:
 
 **3. Test the static router**
 
-Click on the this at 
-
-`http://localhost:10080` link, which will open another tab or window of your browser pointing to port 10080 on your client.
-
+Navigate back to the RDP session and open a tab in your browser pointing to port 10080, by entering the following URL in your browser address field, as follows:
+``
+http://localhost:10080
+``
 You should now see an HTML page that looks like this:
 
 ![Local Web Browser Tab](../../../assets/reactive-microservices/web-page.png)
@@ -325,7 +325,7 @@ It's actually not necessary to set the status, since it will default to HTTP OK 
 
 **3. Test the REST service**
 
-Restart the application by running the following in the terminal or in clicking the execute button.
+Restart the application by running the following in the terminal window.
 
 ``mvn compile vertx:run``
 
@@ -348,10 +348,10 @@ In next step of this scenario, we will discuss a bit a about configuration in Ve
 ## Reactive programing
 In the previous step you did a bit of reactive programming, but Vert.x also support using RxJava. RxJava is a Java VM implementation of [ReactiveX (Reactive Extensions)](http://reactivex.io/) a library for composing asynchronous and event-based programs by using observable sequences.
 
-With the introduction of Lambda in Java8 there we don't have to use RxJava for programming in Vert.x, but depending on your preference and experience you might want to use RxJava instead. Everything we do in this lab is possible to also implement using RxJava. However for simplicity and since RxJava is harder to understand for someone that never used it before we will stick with Java8 and Lambda in this lab.
+With the introduction of Lambda in Java 8, we don't have to use RxJava for programming in Vert.x, but depending on your preference and experience, you might want to use RxJava instead. Everything in this lab could also be implemented using RxJava. However, for simplicity and since RxJava is harder to understand for someone that never used it before, we will stick with Java 8 and Lambda in this lab.
 
 ## 1. Configuration and Vert.x
-Vert.x has a very powerful configuration library called [Vert.x Config](http://vertx.io/docs/vertx-config/java/). The Config library can read configuration as Properties, Json, YaML, etc and it support a number stores like files, directories, http, git (extension), redis (extension), system properties, environment properties. 
+Vert.x has a very powerful configuration library called [Vert.x Config](http://vertx.io/docs/vertx-config/java/). The Config library can read configuration as Properties, JSON, YAML, etc., and it supports a number stores like files, directories, http, git (extension), redis (extension), system properties, environment properties. 
 
 The Config library is structured around:
 
@@ -359,7 +359,7 @@ The Config library is structured around:
 
 * **Configuration store** defines a location from where the configuration data is read and and a syntax (the configuration is retrieved as a JSON Object by default)
 
-By default you can access the configuration in verticle by calling `config().get...`, however it does not support environment-specific configuration like for example Spring Boot. If you recall from the previous lab we used different configuration files for local vs OpenShift. If we like the same behavior in Vert.x we need to implement this ourselves.
+By default you can access the configuration in a verticle by calling config().get..., however it does not support environment-specific configuration like for example Spring Boot or MicroProfile. If you recall from the previous lab we used different configuration files for local vs OpenShift. If we like the same behavior in Vert.x we need to implement this ourselves.
 
 One thing that can seem a bit strange is that the **Config Retriever** reads the configuration asynchronously. So if we want to change the default behaviour we need to take that into consideration.
 
@@ -404,7 +404,7 @@ At a first glance this may look like a good way to implement an environment spec
 
 **THIS WILL NOT WORK!**
 
-The reason that it doesn't work is that when we calling `setupConfiguration()` the `ConfigStore` will execute synchronously, but the actual retrieval of the configuration values is asynchronous and while the program is waiting for async operation like opening a file and read it the `start()` method will continue to run and when it gets to `Integer serverPort = config().getInteger("http.port", 8889);` the value has not been populated yet. E.g. the config `http.port` will fail and the default value of `8889` will always be used.
+The reason that it doesn't work is that when we calling `setupConfiguration()`, the `ConfigStore` will execute synchronously, but the actual retrieval of the configuration values is asynchronous, and while the program is waiting for async operations like opening a file and read it, the `start()` method will continue to run, and when it gets to `Integer serverPort = config().getInteger("http.port", 10080);` the value has not been populated yet, e.g. the config `http.port` will fail and the default value of `8889` will always be used.
 
 **1. Load configuration and other Verticles**
 
@@ -484,23 +484,18 @@ com.redhat.coolstore.MainVerticle
 
 **3. Test the default configuration**
 
-Restart the application by running the following in the terminal or in clicking the execute button.
+Restart the application by running the following in the terminal.
 
 ``mvn compile vertx:run``
 
 In the output you should now see that the server is starting on port 8082 and not 10080 like before.
 
-Click on the **Local Web Browser** tab in the console frame of this browser window, which will open another tab or window of your browser pointing to port 8082 on your client. 
+Navigate back to the RDP session and open a tab in your browser pointing to port 8082, by entering the following URL in your browser address field, as follows:
+``
+http://localhost:8082
+``
+Again, you should now see an HTML page that looks like this:
 
-> CDK Users will not have a **Local Web Browser** tab. Just open the link below:
-
-![Local Web Browser Tab](../../../assets/reactive-microservices/web-browser-tab.png)
-
-Or use this at 
-
-`http://localhost:8082` link.
-
-Again you should now see an HTML page that looks like this:
 
 ![Local Web Browser Tab](../../../assets/reactive-microservices/web-page.png)
 
@@ -523,7 +518,7 @@ So now that you have learned how to create a rest service and also how to implem
 
 The `Router` in Vert.x is very flexible and makes it easy to deal with complex HTTP routing. Some of the key features of Vert.x-Web include:
 * Routing (based on method, path, etc)
-* Regular expression pattern matchingfor paths
+* Regular expression pattern matching for paths
 * Extraction of parameters from paths
 * Content negotiation
 * Request body handling
@@ -598,7 +593,7 @@ router.get("/services/carts").handler(rc -> {
 
 **4. Test the new Route**
 
-Restart the application by running the following in the terminal or in clicking the execute button.
+Restart the application by running the following in the terminal.
 
 ``mvn compile vertx:run``
 
@@ -634,15 +629,12 @@ This should print the body of the response  that looks somewhat like this. Note 
 Also test getting a single cart curl like this:
 ```curl -X GET http://localhost:8082/services/cart/99999; echo```
 
-Click on the **Local Web Browser** tab in the console frame of this browser window, which will open another tab or window of your browser pointing to port 8082 on your client. 
-
-![Local Web Browser Tab](../../../assets/reactive-microservices/web-browser-tab.png)
-
-Or use this at 
-
-`http://localhost:8082` link.
-
+Navigate back to the RDP session and open a tab in your browser pointing to port 8082, by entering the following URL in your browser address field, as follows:
+``
+http://localhost:8082
+``
 Now the default page should have an entry in the table matching the values for your JSON file above.
+
 
 ![Local Web Browser Tab](../../../assets/reactive-microservices/web-page-content.png)
 
@@ -840,7 +832,7 @@ This should print the follow:
 ```
 
 **5. Add endpoint for deleting items**
-Since we are now so skilled in writing endpoints lets go ahead and also create the endpoint for removing a product. The only tricky part about removing is that the request might not remove all products in once. E.g. If we have 10 Red Hat Fedoras and the request just decreases 3 we should not remove the Shopping Cart item, but instead lower the quantity to 7. 
+Since we are now so skilled in writing endpoints lets go ahead and also create the endpoint for removing a product. The only tricky part about removing is that the request might not remove all products at once. E.g. If we have 10 Red Hat Fedoras and the request just decreases 3 we should not remove the Shopping Cart item, but instead lower the quantity to 7. 
 
 
 Again in the `src/main/java/com/redhat/coolstore/CartServiceVerticle.java` file add the following at the `//TODO: Add handler for removing an item from the cart`
@@ -918,7 +910,7 @@ However, looking at the output you can see that the discount and shippingFee is 
 
 ## Using the Vert.x Event Bus for shipping services
 
-In the previous steps we have added more and more functionality to the cart service and when we define our microservices it's often done using a domain model approach. The cart service is central, but we probably do not want it to handle things like calculating shipping fees. In our example we do not have enough data to do a complex shipping service since we lack information about the users shipping address as well as weight of the products etc. It does however make sense to create the shipping service so that if when we have that information we can extend upon it.
+In the previous steps we have added more and more functionality to the cart service and when we define our microservices it's often done using a domain model approach. The cart service is central, but we probably do not want it to handle things like calculating shipping fees. In our example we do not have enough data to do a complex shipping service since we lack information about the users shipping address as well as weight of the products etc. It does however make sense to create the shipping service so that if and when we have that information, we can extend upon it.
 
 Since we are going to implement the Shipping service as another Vert.x Verticle we will not use REST this time. Instead we are going to use the Vert.x Event bus.
 
@@ -935,7 +927,7 @@ The event bus supports publish/subscribe, point to point, and request-response m
 
 The event bus API is very simple. It basically involves registering handlers, unregistering handlers and sending and publishing messages.
 
-Internally the EventBus is an abstraction and Vert.x have several different implementations that can be used depending on demands. Default it uses a local java implementation that can't be shared between different java processes. However, for clustered solutions the event bus can use an distributed in-memory data store like Infinispan (also know as Red Hat JBoss Data Grid) or Hazelcast. There are also work in progress to be able to use a JMS implementation like Apache ActiveMQ (also known as Red Hat AMQ) 
+Internally the EventBus is an abstraction and Vert.x has several different implementations that can be used depending on demands. By default, Vert.x uses a local java implementation that can't be shared between different java processes. However, for clustered solutions the event bus can use an distributed in-memory data store like Infinispan (also know as Red Hat JBoss Data Grid) or Hazelcast. There are also work in progress to be able to use a JMS implementation like Apache ActiveMQ (also known as Red Hat AMQ) 
 
 >**NOTE:** In the near future RHOAR is planned to offer support for Red Hat JBoss Data Grid for clustering use-cases of Vert.x
 
@@ -981,7 +973,7 @@ This is a common messaging pattern called the request-response pattern.
 
 Let’s jump into the API
 
-Getting the event bus
+**Getting the event bus**
 You get a reference to the event bus as follows:
 
 ```java
@@ -1017,7 +1009,7 @@ The headers of the message are available with headers.
 
 
 **1. Add a Shipping Verticle**
-Since RHOAR currently do not support using distributed event bus we will create the Verticle locally. For now our shipping service will only return a fixed ShippingFee of 37.0. RHOAR is planned to support distributes event bus early 2018. Since the Event Bus API is the same very little code changes (if any) will be required to move this to a separate service in OpenShift in the future.
+We will create the Verticle locally. For now our shipping service will only return a fixed ShippingFee of 37.0. Since the Event Bus API is the same very little code changes (if any) will be required to move this to a separate service in OpenShift in the future.
 
 Add this code to the `src/main/java/com/redhat/coolstore/ShippingServiceVerticle.java` file:
 
