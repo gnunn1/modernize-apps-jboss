@@ -70,17 +70,13 @@ user will need to run things in a privileged way, or even with containers as roo
 
 Run the following to login as admin:
 
-`oc login [[HOST_SUBDOMAIN]]-8443-[[KATACODA_HOST]].environments.katacoda.com -u admin -p admin --insecure-skip-tls-verify=true`
-
-> CDK users can simply use `oc login -u admin -p admin`
+`oc login [[$OPENSHIFT_MASTER]] -u admin -p admin --insecure-skip-tls-verify=true`
 
 **If you are unable to login as admin or get any failures, ask an instructor for help.**
 
 Next, run the following command:
 
 `~/install-istio.sh`
-
-> CDK USERS: If you running this outside the Katacoda environment, refer to the **Appendix** at the end of this document and run the above command using the commands in the Appendix.
 
 This command:
 
@@ -182,8 +178,6 @@ The end-to-end architecture of the application is shown below.
 Run the following command:
 
 `~/install-sample-app.sh`
-
-> CDK USERS: If you running this outside the Katacoda environment, refer to the **Appendix** at the end of this document and run the above command using the commands in the Appendix.
 
 The application consists of the usual objects like Deployments, Services, and Routes.
 
