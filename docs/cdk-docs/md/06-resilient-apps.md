@@ -64,15 +64,18 @@ cd ${HOME}
 ## Install Istio
 
 In this step, we'll install Istio into our OpenShift platform.
-
-In order to install Istio, you must be logged in as `admin`. This is required as this
-user will need to run things in a privileged way, or even with containers as root.
-
-Run the following to login as admin:
-
-`oc login [[$OPENSHIFT_MASTER]] -u admin -p admin --insecure-skip-tls-verify=true`
-
+In order to install Istio, you must be logged in as `ocpadmin`. Admin privilege is required as this user will need to run things in a privileged way, or even with containers as root.
+You should be logged in to OpenShift console by now.  If not please log in to it. Then follow these instructions: </br>
+•	Click on the **ocpadmin** icon on the top right corner of the console and select **Copy Login Command** from the pop-down menu. </br>
+•	Paste the login command string from your clipboard into a Terminal window. </br>
+•	Append at the end of the pasted line the string "--insecure-skip-tls-verify=true". </br>
+•	Your pasted command should look similar to this (it will slightly different for you):
+```
+oc login https://masterdnsbbtzqnfr4d23g.eastus.cloudapp.azure.com:8443 --token=BiiQR7QPq_80sPT4cfi2yZjd9KjF3d9f0ieJLX_4r4w --insecure-skip-tls-verify=true
+```
+•	Press return to execute log in to the OpenShift cluster with admin privileges. </br>
 **If you are unable to login as admin or get any failures, ask an instructor for help.**
+
 
 Next, run the following command:
 
@@ -271,11 +274,13 @@ a high-level telemetry showing the rate at which services are accessed.
 To get a better idea of the power of metrics, let's setup an endless loop that will continually access
 the application and generate load. We'll open up a separate terminal just for this purpose. Execute this command:
 
-`while true; do
-    curl -o /dev/null -s -w "%{http_code}\n" \
-      http://istio-ingress-istio-system.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/productpage
-  sleep .2
-done`
+```
+while true; do 
+     curl -o /dev/null -s -w "%{http_code}\n" \ 
+        http://istio-ingress-istio-system.[[HOST_SUBDOMAIN]]/productpage 
+    sleep .2
+done
+```
 
 This command will endlessly access the application and report the HTTP status result in a separate terminal window.
 
@@ -781,11 +786,10 @@ circuit breaker kicking in opening the circuit.
 
 Execute this to simulate a number of users attampting to access the application simultaneously:
 
-
 ```
-    for i in {1..10} ; do
-        curl 'http://istio-ingress-istio-system.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/productpage?foo=[1-1000]' >& /dev/null &
-    done
+   for i in {1..10} ; do
+        curl 'http://istio-ingress-istio-system.[[HOST_SUBDOMAIN]]/productpage?foo=[1-1000]' >& /dev/null &
+   done
 ```
 
 Due to the very conservative circuit breaker, many of these calls will fail with HTTP 503 (Server Unavailable). To see this,
@@ -811,7 +815,7 @@ That's the circuit breaker in action, limiting the number of requests to the ser
 
 ### Stop overloading
 
-Before moving on, stop the traffic generator by clicking here to stop them:
+Before moving on, stop the traffic generator by entering the following command to stop them:
 
 `for i in {1..10} ; do kill %${i} ; done`
 
@@ -960,11 +964,13 @@ Rate limits are examples of quotas, and are handled by the
 
 As before, let's start up some processes to generate load on the app. Execute this command:
 
-`while true; do
-    curl -o /dev/null -s -w "%{http_code}\n" \
-      http://istio-ingress-istio-system.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/productpage
-  sleep .2
-done`
+```
+while true; do 
+     curl -o /dev/null -s -w "%{http_code}\n" \ 
+        http://istio-ingress-istio-system.[[HOST_SUBDOMAIN]]/productpage 
+    sleep .2
+done
+```
 
 This command will endlessly access the application and report the HTTP status result in a separate terminal window.
 
@@ -1105,10 +1111,7 @@ to a recent access to `/productpage`. The page should look something like this:
 As you can see, the trace is comprised of _spans_, where each span corresponds to a
 microservice invoked during the execution of a `/productpage` request.
 
-The first line represents the external call to the entry point of our application controlled by
- `istio-ingress`. It in thrn calls the `productpage` service. Each line below
-represents the internal calls to the other services to construct the result, including the
-time it took for each service to respond.
+The first line represents the external call to the entry point of our application controlled by `istio-ingress`. Under it are the calls to the `productpage` service. Each line below represents the internal calls to the other services to construct the result, including the time it took for each service to respond.
 
 To demonstrate the value of tracing, let's re-visit our earlier timeout bug! If you recall, we had
 injected a 7 second delay in the `ratings` microservice for our user _jason_. So when we loaded the
