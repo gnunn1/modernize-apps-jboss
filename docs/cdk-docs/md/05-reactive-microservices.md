@@ -266,6 +266,7 @@ You should see output that looks like this:
 [INFO] jan 12, 2018 11:25:40 FM io.vertx.core.impl.launcher.commands.VertxIsolatedDeployer
 [INFO] INFO: Succeeded in deploying verticle
 ```
+At this point, press CTRL-C to stop the execution so that we can add more code.
 
 **3. Add a router that can serve static content**
 Now let's add a Web server that can serve static content, which only requires three lines of code at the `//TODO: Create Router` marker:
@@ -305,6 +306,8 @@ You should now see an HTML page that looks like this:
 
 > **NOTE:** The Fetch button doesn't work yet, but we will fix that later in this lab.
 
+Press CTRL-C at this point to stop the execution of the Vert.x process.
+
 **3. Add a simple REST Handler**
 
 Now let's add a simple rest service. Replace the `//TODO: Create hello router` marker with this code to
@@ -334,6 +337,8 @@ After Vert.x is start execute a curl command in another terminal so like this.
 ```curl -X GET http://localhost:10080/hello; echo```
 
 The response body should be a JSON string `{"message":"Hello"}`.
+
+Press CTRL-C at this point to stop the execution of the Vert.x process.
 
 ## Congratulations
 
@@ -789,7 +794,10 @@ This should now return a shopping cart where one more instance of the product is
 
 Now let's try adding a new product.
 
-The CartService depends on the CatalogService and just like in the Spring Boot example we could have created mocks for calling the Catalog Service, however since our example is already complex, we will simply test it with the CatalogService running. 
+The CartService depends on the CatalogService and just like in the Spring Boot example we could have created mocks for calling the Catalog Service, however since our example is already complex, we will simply test it with the CatalogService running.</br>
+
+At this point, you can stop the Vert.x and the SpringBoot processes by pressing CTRL-C in each of the Terminal windows from which you started them.
+
 
 >**NOTE:** The CatalogService in it's turn depends on the InventoryService to retrieve the quantity in stock, however since we don't really care about that in the Shopping Cart we will just rely on the Fallback method of CatalogService when testing. 
 
