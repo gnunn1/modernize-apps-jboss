@@ -91,15 +91,23 @@ Note: Password for demouser is demoPassword1!
 
 ### For Mac users 
 1. Before beginning, you will need to install the Microsoft Remote Desktop Application from Apple’s App Store:  https://itunes.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12
-2. Open the application and Click on the '+' symbol and select Desktop to add a new connection."
-3. In the new window that appears, provide the following details and save the connection.
+2. Open the application and Click on the '+' symbol and select Desktop to add a new connection.
+<kbd>![](Images/macrdp1.jpg)</kbd>
+3. In the **Add Desktop** dialog box that appears, provide the following details and save the connection.
   * PC Name : *Provide the **Public IP Address** of the **labvm***
-  * Connection Name : *Provide any connection name*
-4.	Save the connection and close the dialog box.
-5. Double click the newly created connection. If the "**verify certificate**" dialog appears, click on continue.
-6. Then the following dialog will appear and ask you to authenticate.  Use your Jump VM Username and Jump VM Password to do this.</br>
+  * Connection Name : *Provide any connection name* </br>
+  <img src="Images/macrdp2.jpg" width="450" height="275"/> </br>
+4.	Click on the **Show more** button at the bottom of the dialog box.
+5. In the **General** tab options, ensure to check **Connect to admin session** checkbox.
+<img src="Images/macrdp3.jpg" width="425" height="550"/> </br>
+6. In the **Display** tab options, ensure to un-check the **Start session in full screen** checkbox.
+<img src="Images/macrdp4.jpg" width="425" height="550"/> </br> 
+7. Save the connection and close the dialog box.
+8. Double click the newly created connection. If the "**verify certificate**" dialog appears, click on continue.
+9. Then the following dialog will appear and ask you to authenticate.  Use your Jump VM Username and Jump VM Password to do this.</br>
 * Username : **demouser**
 * Password : **demoPassword1!**</br>
  <kbd>![](Images/xvnc.jpg)</kbd>
+ 
  
 
