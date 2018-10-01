@@ -782,8 +782,7 @@ static class InventoryClientFallbackFactory implements FallbackFactory<Inventory
 
 ```
 
-After creating the fallback factory all we have to do is to tell Feign to use that fallback in case of an issue, by adding the fallbackFactory property to the `@FeignClient` annotation. Open the file to replace
-it for you at the `@FeignClient(name="inventory")` line:
+After creating the fallback factory all we have to do is to tell Feign to use that fallback in case of an issue, by adding the fallbackFactory property to the `@FeignClient` annotation. Open the file and replace the line `@FeignClient(name="inventory")` with the following:
 
 ```java
 @FeignClient(name="inventory",fallbackFactory = InventoryClient.InventoryClientFallbackFactory.class)
