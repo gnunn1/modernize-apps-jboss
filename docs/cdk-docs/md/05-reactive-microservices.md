@@ -643,6 +643,8 @@ Now the default page should have an entry in the table matching the values for y
 
 ![Local Web Browser Tab](../../../assets/reactive-microservices/web-page-content.png)
 
+Press CTRL-C at this point to stop the execution of the Vert.x process.
+
 ## Congratulations
 
 You have now successfully implemented the first out of many endpoints that we need to continue to strangle the monolith. You have also learned that `<object>::<method>` is a convenient way to reference a lambda expression.
