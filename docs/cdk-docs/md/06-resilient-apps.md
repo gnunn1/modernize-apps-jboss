@@ -53,31 +53,32 @@ Sounds fun, right? Let's get started!
 
 ## Setup for Exercise
 
-Run the following commands to set up your environment for this scenario and start in the right directory:
+In order to install Istio, you must be logged in to the machine as "root" and to the OpenShift cluster as `ocpadmin`. Admin privilege is required as this user will need to run things in a privileged way, or even with containers as root.
+
+At this point, you must already be logged in as "demouser" on a Terminal window. You now need to switch to "root". Execute the following from the terminal window (for password, please enter the same password as the one you were provided for "demouser"):
 
 ```sh
-#!/usr/bin/env bash
-cd ${HOME}
+sudo -s -H
+cd ~
 
 ```
 
-## Install Istio
-
-In this step, we'll install Istio into our OpenShift platform.
-In order to install Istio, you must be logged in as `ocpadmin`. Admin privilege is required as this user will need to run things in a privileged way, or even with containers as root.
 You should be logged in to OpenShift console by now.  If not please log in to it. Then follow these instructions: </br>
 •	Click on the **ocpadmin** icon on the top right corner of the console and select **Copy Login Command** from the pop-down menu. </br>
 •	Paste the login command string from your clipboard into a Terminal window. </br>
 •	Append at the end of the pasted line the string "--insecure-skip-tls-verify=true". </br>
-•	Your pasted command should look similar to this (it will slightly different for you):
+•	Your pasted command should look similar to this (it will be slightly different for you):
 ```
 oc login https://masterdnsbbtzqnfr4d23g.eastus.cloudapp.azure.com:8443 --token=BiiQR7QPq_80sPT4cfi2yZjd9KjF3d9f0ieJLX_4r4w --insecure-skip-tls-verify=true
 ```
 •	Press return to execute log in to the OpenShift cluster with admin privileges. </br>
 **If you are unable to login as admin or get any failures, ask an instructor for help.**
 
+## Install Istio
 
-Next, run the following command:
+In this step, we'll install Istio into the OpenShift platform.
+
+Run the following command:
 
 `~/install-istio.sh`
 
