@@ -1147,7 +1147,7 @@ Create a new project for the *cart* service:
 
 **3. Open the OpenShift Web Console**
 
-Navigate back to the RDP session and open a tab in your browser pointing to the OpenShift Web Console (You should be familiar with it by now!). Navigate to the new catalog project overview page, or use the following quick link:
+Open a tab in your browser pointing to the OpenShift Web Console (You should be familiar with it by now!). Navigate to the new catalog project overview page, or use the following quick link:
 ``
 https://$OPENSHIFT_MASTER/console/project/cart/
 ``
