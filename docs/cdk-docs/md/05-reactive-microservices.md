@@ -1310,7 +1310,7 @@ You should get a complete set of products, along with their inventory."
 
 **5. Test the UI**
 
-Navigate back to the RDP session and open a tab in your browser pointing to the monolith UI and observe that the new catalog is being used along with the monolith:
+From the OpenShift Web Console, open the project "Coolstore Monolith - Dev" and click on the application Route. This will open the monolith UI. Observe that the new catalog is being used along with the monolith:
 
 ![Greeting](../../../assets/mono-to-micro-part-2/coolstore-web.png)
 
