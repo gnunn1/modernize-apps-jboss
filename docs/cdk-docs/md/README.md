@@ -110,4 +110,22 @@ Note: Password for demouser is demoPassword1!
  <kbd>![](Images/xvnc.jpg)</kbd>
  
  
+ ## Editing files
+ We recommend using Visual Studio Code full-screen editor for editing files during this workshop.  Visual Studio Code has been installed on your Jump VM and can be invoked from your RDP session by opening a Terminal window and entering the command `oc`:
+ 
+ * Go to your RDP session
+ * In the Gnome user interface, click on the "Applications" menu and select "Terminal". This will open a new Terminal window
+ * In the Terminal window, enter:
+ 
+ ```
+    cd $HOME/projects
+    code .
+ ```
 
+ Throught the labs, you will be asked to create and/or open source files. To speed up this activity, when the instructions give you the relative path of a file that you need to open or create, you should first ensure that you're in the directory that corresponds to the lab, e.g. $HOME/projects/<microservice dir, e.g. inventory> and then invoke `oc` from there by giving the file name including its relative path.  For example, if the lab guide for the inventory microservice instructs you to "*Create and open the file which will contain the new class : src/main/java/com/redhat/coolstore/rest/HealthChecks.java*", go to the Terminal window you opened in your Gnome user interface, and then execute the following commands (you could cut-and-paste the relative path of the file name from the lab guide to the Terminal window):
+ 
+ ```
+ cd $HOME/projects/inventory  # the last directory will vary depending on the lab you're working on
+ code src/main/java/com/redhat/coolstore/rest/HealthChecks.java
+ ```
+ 
