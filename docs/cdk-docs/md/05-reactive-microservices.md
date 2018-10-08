@@ -504,6 +504,7 @@ Again, you should now see an HTML page that looks like this:
 
 ![Local Web Browser Tab](../../../assets/reactive-microservices/web-page.png)
 
+Press CTRL-C at this point to stop the execution of the Vert.x process.
 
 ## Congratulations
 
