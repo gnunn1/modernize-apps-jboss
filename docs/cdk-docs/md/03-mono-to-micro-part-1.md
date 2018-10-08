@@ -31,7 +31,7 @@ But after this scenario, you should end up with something like:
 
 ## What is Thorntail (ex-WildFly Swarm)? 
 
-![Logo](../../../assets/mono-to-micro-part-1/swarm-logo.png)
+![Logo](../../../docs/cdk-docs/md/Images/thorntail.jpg)
 
 Java EE applications are traditionally created as an **ear** or **war** archive including all 
 dependencies and deployed in an application server. Multiple Java EE applications can and 
