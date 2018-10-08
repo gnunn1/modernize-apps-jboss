@@ -235,10 +235,8 @@ using proprietary interfaces.
 While the code in our startup and shutdown is very simple, in the real world this code may require additional thought as part of the migration. However, using this method makes the code much more portable.
 
 **2. Open the file** </br>
-Now navigate back to the SSH session and open the file `src/main/java/com/redhat/coolstore/utils/StartupListener.java` using the following command.
-````
-vi src/main/java/com/redhat/coolstore/utils/StartupListener.java
-````
+Now navigate back to the SSH session and open the file `src/main/java/com/redhat/coolstore/utils/StartupListener.java` 
+
 The first issue we will tackle is the one reporting the use of _Weblogic ApplicationLifecyleEvent_ and
 _Weblogic LifecycleListener_ in this file. </br>
 Replace the code in the file with the following code:
@@ -301,10 +299,8 @@ We will use the standard Java Logging framework, a much more portable framework.
 
 **1. Open the file** </br>
 
-Open the offending file `src/main/java/com/redhat/coolstore/service/OrderServiceMDB.java` using the following command.
-````
-vi src/main/java/com/redhat/coolstore/service/OrderServiceMDB.java
-````
+Open the offending file `src/main/java/com/redhat/coolstore/service/OrderServiceMDB.java`
+
 **2. Make the changes**
 </br>Replace the code in the file with the following code:
 
@@ -434,10 +430,8 @@ Run this command to remove them:
 
 **3. Fix the code**
 
-Open `src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java` using the following command.
-````
-vi src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
-````
+Open `src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java`
+
 Replace the code in the file with the following code:
 
 ```java
@@ -562,10 +556,7 @@ We should also set the `JBOSS_HOME` environment variable like this:
 
 Done! That is how easy it is to install JBoss EAP. 
 
-Open the `pom.xml` file by running the following command.
-````
-vi pom.xml
-````
+Open the `pom.xml` file
 
 ## The maven-wildfly-plugin
 JBoss EAP comes with a nice maven-plugin tool that can stop, start, deploy, and configure JBoss EAP directly from Apache Maven. Let's add that in the pom.xml file.
