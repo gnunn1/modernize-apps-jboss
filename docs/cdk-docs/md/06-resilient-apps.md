@@ -854,7 +854,7 @@ This policy says that if any instance of the `ratings` service fails more than o
 Next, deploy a new instance of the `ratings` service which has been misconfigured and will return a failure
 (HTTP 500) value for any request. Execute:
 
-`${ISTIO_HOME}/bin/istioctl kube-inject -f ~/projects/ratings/broken.yaml | oc create -f -`
+`${ISTIO_HOME}/bin/istioctl kube-inject -f /home/demouser/projects/ratings/broken.yaml | oc create -f -`
 
 Verify that the broken pod has been added to the `ratings` load balancing service:
 
@@ -870,7 +870,7 @@ ratings-v1-broken-1694306571-c6zlk   2/2       Running   0          7s
 
 Save the name of this pod to an environment variable:
 
-`BROKEN_POD_NAME=$(oc get pods -l app=ratings,broken=true -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}')`
+`export BROKEN_POD_NAME=$(oc get pods -l app=ratings,broken=true -o jsonpath='{.items[?(@.status.phase=="Running")].metadata.name}')`
 
 Requests to the `ratings` service will be load-balanced across these two pods. The circuit breaker will
 detect the failures in the broken pod and eject it from the load balancing pool for a minimum of 15 minutes.
