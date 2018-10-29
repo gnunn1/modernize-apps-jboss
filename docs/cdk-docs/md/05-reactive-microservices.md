@@ -356,7 +356,7 @@ In the previous step you did a bit of reactive programming, but Vert.x also supp
 With the introduction of Lambda in Java 8, we don't have to use RxJava for programming in Vert.x, but depending on your preference and experience, you might want to use RxJava instead. Everything in this lab could also be implemented using RxJava. However, for simplicity and since RxJava is harder to understand for someone that never used it before, we will stick with Java 8 and Lambda in this lab.
 
 ## 1. Configuration and Vert.x
-Vert.x has a very powerful configuration library called [Vert.x Config](http://vertx.io/docs/vertx-config/java/). The Config library can read configuration as Properties, JSON, YAML, etc., and it supports a number stores like files, directories, http, git (extension), redis (extension), system properties, environment properties. 
+Vert.x has a very powerful configuration library called [Vert.x Config](http://vertx.io/docs/vertx-config/java/). The Config library can read configuration as Properties, JSON, YAML, etc., and it supports a number of stores like files, directories, http, git (extension), redis (extension), system properties, environment properties. 
 
 The Config library is structured around:
 
